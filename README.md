@@ -6,6 +6,7 @@ Tecnologias utilizadas:
 - React
 - React Router
 - Vite
+- [Vitest](https://vitest.dev)
 
 # React + TypeScript + Vite
 
