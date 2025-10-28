@@ -10,6 +10,12 @@ Tecnologias utilizadas:
 - [shadcn](https://ui.shadcn.com/docs)
 - Tailwind
 
+Extensões:
+
+- [biomejs](https://biomejs.dev/)
+  - Como uma alternativa ao ESLint e ao Prettier
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
