@@ -7,6 +7,8 @@ Tecnologias utilizadas:
 - React Router
 - Vite
 - [Vitest](https://vitest.dev)
+- [shadcn](https://ui.shadcn.com/docs)
+- Tailwind
 
 # React + TypeScript + Vite
 
