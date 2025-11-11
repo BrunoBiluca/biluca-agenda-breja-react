@@ -1,3 +1,3 @@
 export function Breweries() {
-  return <></>;
+  return <>Breweries</>;
 }
