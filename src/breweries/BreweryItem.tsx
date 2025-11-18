@@ -7,7 +7,7 @@ export function BreweryItem() {
       <CardHeader>
         <CardTitle>Cervejaria do Alemão</CardTitle>
         <CardDescription>Rua Joaquim Policarpio da Costa, 543</CardDescription>
-      </CardHeader>{" "}
+      </CardHeader>
     </Card>
   );
 }
