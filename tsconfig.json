@@ -5,7 +5,10 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    // ... other options
-    "erasableSyntaxOnly": false // Or simply remove the flag
+    "baseUrl": ".",
+    "paths": {
+      "@ui/*": ["./src/components/ui/*"],
+      "@lib/*": ["./src/lib/*"]
+    }
   }
 }

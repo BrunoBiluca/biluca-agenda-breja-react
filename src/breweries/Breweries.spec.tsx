@@ -1,11 +1,10 @@
 import { expect, test } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { Breweries } from "./Breweries";
 
 test("should have the main components", () => {
-  render(<Breweries />);
+  const { getByRole, container } = render(<Breweries />);
 
-  // Query by text content
-  const element = screen.getByText("Breweries");
-  expect(element).not.toBeUndefined();
+  expect(getByRole("heading", { level: 2 })).not.toBeUndefined();
+  expect(container.querySelector(".container")).not.toBeUndefined();
 });
