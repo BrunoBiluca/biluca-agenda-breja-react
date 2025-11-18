@@ -1,12 +1,12 @@
 import { Card, CardDescription, CardHeader, CardTitle } from "@ui/card";
 
-export function BreweryItem() {
+export function BreweryItem({ brewery }: any) {
   return (
     <Card>
       <img src="https://placehold.co/600x400" />
       <CardHeader>
-        <CardTitle>Cervejaria do Alemão</CardTitle>
-        <CardDescription>Rua Joaquim Policarpio da Costa, 543</CardDescription>
+        <CardTitle>{brewery.name}</CardTitle>
+        <CardDescription>{brewery.address_1}</CardDescription>
       </CardHeader>
     </Card>
   );
