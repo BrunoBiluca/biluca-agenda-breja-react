@@ -1,15 +1,15 @@
-import { defineConfig } from 'vitest/config'
-import { preview } from '@vitest/browser-preview'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vitest/config";
+import { playwright } from "@vitest/browser-playwright";
+import react from "@vitejs/plugin-react";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), tsconfigPaths()],
   test: {
     browser: {
       enabled: true,
-      provider: preview(),
-      instances: [
-      ],
+      provider: playwright(),
+      instances: [{ browser: "chromium" }],
     },
   },
-})
+});

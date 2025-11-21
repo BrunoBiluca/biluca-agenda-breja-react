@@ -1,4 +1,4 @@
-import { Schedule } from "src/schedule/Schedule";
+import { Schedule } from "../schedule/Schedule";
 import { Breweries } from "../breweries/Breweries";
 
 export function MainPage() {
