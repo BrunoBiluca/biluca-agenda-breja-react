@@ -25,4 +25,29 @@ describe("Breweries", () => {
 
     await expect.element(page.getByRole("status")).toBeInTheDocument();
   });
+
+  test("should have a list of breweries", async () => {
+    const mock = new MockBreweriesData();
+    render(
+      <MockBreweriesDataContext mockValue={mock}>
+        {<Breweries />}
+      </MockBreweriesDataContext>
+    );
+
+    await expect.element(page.getByRole("list")).toBeInTheDocument();
+
+    await expect
+      .element(page.getByText(mock.items[0].name))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByText(mock.items[0].address_1))
+      .toBeInTheDocument();
+
+    await expect
+      .element(page.getByText(mock.items[1].name))
+      .toBeInTheDocument();
+    await expect
+      .element(page.getByText(mock.items[1].address_1))
+      .toBeInTheDocument();
+  });
 });

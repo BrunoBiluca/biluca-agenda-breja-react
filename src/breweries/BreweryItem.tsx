@@ -2,7 +2,7 @@ import { Card, CardDescription, CardHeader, CardTitle } from "@ui/card";
 
 export function BreweryItem({ brewery }: any) {
   return (
-    <Card>
+    <Card role="listitem">
       <img src="https://placehold.co/600x400" />
       <CardHeader>
         <CardTitle>{brewery.name}</CardTitle>
