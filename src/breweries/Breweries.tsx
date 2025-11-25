@@ -23,6 +23,8 @@ export function Breweries() {
         <div role="status" aria-label="Loading">
           <span>Loading...</span>
         </div>
+      ) : breweries.length === 0 ? (
+        <p>Nenhuma cervejaria encontrada</p>
       ) : (
         <div className="container grid grid-cols-4 gap-4" role="list">
           {breweries.map((brewery) => (

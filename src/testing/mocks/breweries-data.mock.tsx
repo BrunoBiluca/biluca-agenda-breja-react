@@ -1,6 +1,8 @@
 import type { BreweriesData } from "@app/breweries-data/BreweriesData";
 
 export class MockBreweriesData implements BreweriesData {
+  constructor(private noData: boolean = false) {}
+
   items: any[] = [
     {
       id: "5128df48-79fc-4f0f-8b52-d06be54d0cec",
@@ -41,6 +43,9 @@ export class MockBreweriesData implements BreweriesData {
   ];
 
   getAll() {
+    if (this.noData) {
+      return Promise.resolve([]);
+    }
     return Promise.resolve(this.items);
   }
 }
