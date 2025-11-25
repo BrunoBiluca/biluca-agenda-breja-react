@@ -1,5 +1,6 @@
 import { Schedule } from "../schedule/Schedule";
-import { Breweries } from "../breweries/Breweries";
+import { Breweries } from "../breweries/breweries";
+import { Outlet } from "react-router";
 
 export function MainPage() {
   return (
@@ -15,6 +16,7 @@ export function MainPage() {
       <section id="breweries">
         <Breweries />
       </section>
+      <Outlet />
     </>
   );
 }

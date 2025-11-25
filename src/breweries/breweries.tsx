@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { BreweryItem } from "./BreweryItem";
+import { BreweryItem } from "./brewery-item";
 import { BreweriesDataContext } from "@app/breweries-data/BreweriesDataContext";
 
 export function Breweries() {

@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import { render } from "@testing-library/react";
-import { Breweries } from "./Breweries";
+import { Breweries } from "./breweries";
 
 test("should have the main components", () => {
   const { getByRole, container } = render(<Breweries />);
