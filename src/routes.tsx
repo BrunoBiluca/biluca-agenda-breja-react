@@ -8,10 +8,6 @@ export const router = createBrowserRouter([
     Component: MainPage,
     children: [
       {
-        index: true,
-        Component: MainPage,
-      },
-      {
         path: ":breweryId",
         Component: BreweryDetail,
       },

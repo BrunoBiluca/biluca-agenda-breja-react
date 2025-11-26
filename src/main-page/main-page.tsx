@@ -5,9 +5,9 @@ import { Outlet } from "react-router";
 export function MainPage() {
   return (
     <>
-      <header>
-        <h1>
-          Bora Beber <span>Usuário</span>?
+      <header className="text-2xl">
+        <h1 className="font-bold">
+          Bora Beber <span className="text-orange-base">Usuário</span>?
         </h1>
       </header>
       <section id="schedule">
