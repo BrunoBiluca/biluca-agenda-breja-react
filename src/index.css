@@ -16,3 +16,12 @@
 
   --font-sans: 'Cairo', sans-serif;
 }
+
+@layer base {
+  h1 {
+    @apply text-2xl font-bold text-black;
+  }
+  h2 {
+    @apply text-lg font-semibold text-black;
+  }
+}
