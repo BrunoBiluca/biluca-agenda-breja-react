@@ -6,7 +6,7 @@ export function BreweryItem({ brewery }: any) {
     <NavLink to={`/${brewery.id}`} role="listitem">
       <Card role="listitem">
         <img src="https://placehold.co/600x400" />
-        <CardHeader>
+        <CardHeader className="p-6">
           <CardTitle>{brewery.name}</CardTitle>
           <CardDescription className="text-gray-500">
             {brewery.address_1}

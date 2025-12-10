@@ -26,7 +26,10 @@ export function Breweries() {
       ) : breweries.length === 0 ? (
         <p>Nenhuma cervejaria encontrada</p>
       ) : (
-        <div className="container grid grid-cols-4 gap-4" role="list">
+        <div
+          className="container grid max-w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+          role="list"
+        >
           {breweries.map((brewery) => (
             <BreweryItem key={brewery.id} brewery={brewery} />
           ))}
