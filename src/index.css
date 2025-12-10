@@ -1,5 +1,5 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @theme {
   --color-*: initial;
@@ -14,7 +14,7 @@
   --color-orange-light: #fdd97c;
   --color-red-base: #ef4444;
 
-  --font-sans: 'Cairo', sans-serif;
+  --font-sans: "Cairo", sans-serif;
 }
 
 @layer base {
@@ -22,6 +22,6 @@
     @apply text-2xl font-bold text-black;
   }
   h2 {
-    @apply text-lg font-semibold text-black;
+    @apply text-xl font-semibold text-black;
   }
 }

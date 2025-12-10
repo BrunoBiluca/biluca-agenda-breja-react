@@ -10,19 +10,15 @@ export function MainPage() {
         <h1>
           Bora beber, <span className="text-orange-base">Usuário</span>?
         </h1>
-        <button
-          className="bg-gray-200 py-2 px-3 rounded-lg flex items-center
-         gap-2 border-gray-500 border hover:bg-gray-100 hover:cursor-pointer
-          transition"
-        >
+        <button className="flex items-center gap-2 rounded-lg border border-gray-500 bg-gray-200 px-3 py-2 transition hover:cursor-pointer hover:bg-gray-100">
           <SignOutIcon />
           Sair
         </button>
       </header>
-      <section className="mt-4 mb-2" id="schedule">
+      <section id="schedule" className="my-4">
         <Schedule />
       </section>
-      <section id="breweries">
+      <section id="breweries" className="my-4">
         <Breweries />
       </section>
       <Outlet />

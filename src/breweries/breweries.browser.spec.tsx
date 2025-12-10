@@ -61,7 +61,7 @@ describe("Breweries with valid (mock) data", () => {
   test("should open brewery details when brewery item is clicked", async () => {
     await expect.element(page.getByRole("list")).toBeInTheDocument();
 
-    for (let b of mock.items) {
+    for (const b of mock.items) {
       const breweryItem = page.getBreweryItem(b.name);
       expect(breweryItem).toBeVisible();
       expect(breweryItem).toHaveAttribute("href", "/" + b.id);

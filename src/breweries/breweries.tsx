@@ -18,7 +18,7 @@ export function Breweries() {
 
   return (
     <>
-      <h2>Cervejarias</h2>
+      <h2 className="mb-3">Cervejarias</h2>
       {breweries === undefined ? (
         <div role="status" aria-label="Loading">
           <span>Loading...</span>

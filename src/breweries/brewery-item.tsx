@@ -8,7 +8,9 @@ export function BreweryItem({ brewery }: any) {
         <img src="https://placehold.co/600x400" />
         <CardHeader>
           <CardTitle>{brewery.name}</CardTitle>
-          <CardDescription>{brewery.address_1}</CardDescription>
+          <CardDescription className="text-gray-500">
+            {brewery.address_1}
+          </CardDescription>
         </CardHeader>
       </Card>
     </NavLink>
