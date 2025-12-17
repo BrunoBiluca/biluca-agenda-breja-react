@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import { MainPage } from "./main-page/main-page";
 import { BreweryDetail } from "./breweries/brewery-detail";
+import { Login } from "./auth/login";
 
 export const router = createBrowserRouter([
   {
@@ -12,5 +13,9 @@ export const router = createBrowserRouter([
         Component: BreweryDetail,
       },
     ],
+  },
+  {
+    path: "/login",
+    Component: Login,
   },
 ]);

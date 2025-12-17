@@ -3,7 +3,7 @@ import { router } from "./routes";
 
 function App() {
   return (
-    <div className="max-w-5xl mx-auto">
+    <div>
       <RouterProvider router={router} />
     </div>
   );
