@@ -5,7 +5,7 @@ import { SignOutIcon } from "@phosphor-icons/react";
 
 export function MainPage() {
   return (
-    <div className="mx-auto max-w-5xl">
+    <div className="mx-auto max-w-5xl py-4">
       <header className="flex justify-between">
         <h1>
           Bora beber, <span className="text-orange-base">Usuário</span>?
