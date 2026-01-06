@@ -1,4 +1,5 @@
-import type { BreweriesData, Brewery } from "./BreweriesData";
+import type { BreweriesData } from "./BreweriesData";
+import type { Brewery } from "./Brewery.model";
 
 export class ExternalBreweriesData implements BreweriesData {
   async getAll(): Promise<Brewery[]> {
