@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import { MainPage } from "./main-page/main-page";
 import { BreweryDetail } from "./breweries/brewery-detail";
-import { Login } from "./auth/login";
+import { LandingPage } from "./auth/landing-page";
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +16,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "/login",
-    Component: Login,
+    Component: LandingPage,
   },
 ]);
