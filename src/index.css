@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+:root {
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+}
+
 @theme {
   --color-*: initial;
 
@@ -13,6 +18,8 @@
   --color-orange-base: #fbbf24;
   --color-orange-light: #fdd97c;
   --color-red-base: #ef4444;
+  --color-green-base: #22c55e;
+  --color-blue-base: #3b82f6;
 
   --font-sans: "Cairo", sans-serif;
 }
