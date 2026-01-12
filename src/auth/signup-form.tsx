@@ -54,13 +54,13 @@ export function SignUpForm() {
     validatePasswordField(password);
   }
 
-  function updateEmail(e: any) {
+  async function updateEmail(e: any) {
     const newValue = e.target.value;
     setEmail(newValue);
-    validateEmailField(newValue);
+    await validateEmailField(newValue);
   }
 
-  function validateEmailField(value: string) {
+  async function validateEmailField(value: string) {
     if (!value) {
       setEmailError("Email é obrigatório");
       return;
@@ -68,6 +68,11 @@ export function SignUpForm() {
 
     if (!validateEmail(value)) {
       setEmailError("Email inválido");
+      return;
+    }
+
+    if (await auth.isEmailTaken(value)) {
+      setEmailError("Email ja cadastrado");
       return;
     }
 
@@ -83,6 +88,11 @@ export function SignUpForm() {
   function validatePasswordField(value: string) {
     if (!value) {
       setPasswordError("Password é obrigatório");
+      return;
+    }
+
+    if (value.length < 8) {
+      setPasswordError("Password deve ter pelo menos 8 caracteres");
       return;
     }
 

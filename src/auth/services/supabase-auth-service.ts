@@ -7,6 +7,19 @@ const supabase = createClient(
 );
 
 export class SupabaseAuthService extends AuthService {
+  async isEmailTaken(value: string): Promise<boolean> {
+    try {
+      const { data } = await supabase.auth.signUp({
+        email: value,
+        password: "wrong-passwork",
+      });
+
+      return data.user !== null;
+    } catch (error: unknown) {
+      return false;
+    }
+  }
+
   async signup(email: string, password: string, name: string): Promise<void> {
     try {
       const { error } = await supabase.auth.signUp({
