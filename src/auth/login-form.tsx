@@ -1,7 +1,26 @@
 import { FieldError, FieldGroup, FieldLabel } from "@ui/field";
 import { Input } from "@ui/input";
+import { useContext, useState } from "react";
+import { AuthContext } from "./services/auth-context";
+import { useNavigate } from "react-router";
 
 export function LoginForm() {
+  const auth = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  function handleLogin() {
+    try {
+      auth.login(email, password);
+      navigate("/");
+    } catch (error) {
+      setError((error as Error).message);
+    }
+  }
+
   return (
     <>
       <FieldGroup>
@@ -12,8 +31,10 @@ export function LoginForm() {
           id="email"
           aria-invalid="false"
           className="border-[#e6e0db] text-[#8a6d4b]"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
-        <FieldError>Invalid email</FieldError>
+        {!email && <FieldError>Email é obrigatório</FieldError>}
       </FieldGroup>
       <FieldGroup>
         <FieldLabel htmlFor="password" className="mb-1">
@@ -24,15 +45,19 @@ export function LoginForm() {
           aria-invalid="false"
           type="password"
           className="border-[#e6e0db] text-[#8a6d4b]"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
-        <FieldError>Invalid password</FieldError>
+        {!password && <FieldError>Senha é obrigatória</FieldError>}
       </FieldGroup>
       <button
         type="button"
         className="bg-orange-base hover:bg-orange-base/80 w-full rounded-md p-2"
+        onClick={handleLogin}
       >
         Entrar
       </button>
+      {error && <FieldError>{error}</FieldError>}
     </>
   );
 }

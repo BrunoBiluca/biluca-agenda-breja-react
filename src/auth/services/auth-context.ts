@@ -1,7 +1,7 @@
 import { isStandalone } from "@app/app-config";
 import { LocalAuthService } from "./local-auth-service";
 import { SupabaseAuthService } from "./supabase-auth-service";
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import type { AuthService } from "./auth-service";
 
 function authServiceFac() {
@@ -9,3 +9,5 @@ function authServiceFac() {
 }
 
 export const AuthContext = createContext<AuthService>(authServiceFac());
+
+export const useAuth = () => useContext(AuthContext);

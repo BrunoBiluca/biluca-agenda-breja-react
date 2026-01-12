@@ -7,6 +7,10 @@ const supabase = createClient(
 );
 
 export class SupabaseAuthService extends AuthService {
+  getLoggedUser(): string | null {
+    throw new Error("Method not implemented.");
+  }
+
   async isEmailTaken(value: string): Promise<boolean> {
     try {
       const { data } = await supabase.auth.signUp({

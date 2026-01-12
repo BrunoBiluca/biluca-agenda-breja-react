@@ -1,16 +1,29 @@
 import { Schedule } from "../schedule/Schedule";
 import { Breweries } from "../breweries/breweries";
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import { SignOutIcon } from "@phosphor-icons/react";
+import { useAuth } from "@app/auth/services/auth-context";
 
 export function MainPage() {
+  const auth = useAuth();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    auth.logout();
+    navigate("/login");
+  }
+
   return (
     <div className="mx-auto max-w-5xl py-4">
       <header className="flex justify-between">
         <h1>
-          Bora beber, <span className="text-orange-base">Usuário</span>?
+          Bora beber,{" "}
+          <span className="text-orange-base">{auth.getLoggedUser()!}</span>?
         </h1>
-        <button className="flex items-center gap-2 rounded-lg border border-gray-500 bg-gray-200 px-3 py-2 transition hover:cursor-pointer hover:bg-gray-100">
+        <button
+          className="flex items-center gap-2 rounded-lg border border-gray-500 bg-gray-200 px-3 py-2 transition hover:cursor-pointer hover:bg-gray-100"
+          onClick={handleLogout}
+        >
           <SignOutIcon />
           Sair
         </button>
