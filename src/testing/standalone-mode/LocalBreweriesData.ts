@@ -1,5 +1,5 @@
-import { BreweriesData } from "./BreweriesData";
-import { type Brewery } from "./Brewery.model";
+import { BreweriesData } from "@app/breweries-data/BreweriesData";
+import { type Brewery } from "@app/breweries-data/Brewery.model";
 
 export class LocalBreweriesData extends BreweriesData {
   getAll(): Promise<Brewery[]> {

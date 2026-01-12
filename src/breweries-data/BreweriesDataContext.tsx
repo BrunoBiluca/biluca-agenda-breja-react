@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { LocalBreweriesData } from "./LocalBreweriesData";
+import { LocalBreweriesData } from "@testing/standalone-mode/LocalBreweriesData";
 import type { BreweriesData } from "./BreweriesData";
 import { ExternalBreweriesData } from "./ExternalBreweriesData";
 
@@ -8,9 +8,8 @@ function BreweriesDataFac() {
   return isStandalone ? new LocalBreweriesData() : new ExternalBreweriesData();
 }
 
-export const BreweriesDataContext = createContext<BreweriesData>(
-  BreweriesDataFac()
-);
+export const BreweriesDataContext =
+  createContext<BreweriesData>(BreweriesDataFac());
 
 export function BreweriesDataProvider({ children }: any) {
   return (

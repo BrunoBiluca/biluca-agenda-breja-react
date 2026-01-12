@@ -1,5 +1,5 @@
 import { isStandalone } from "@app/app-config";
-import { LocalAuthService } from "./local-auth-service";
+import { LocalAuthService } from "@testing/standalone-mode/local-auth-service";
 import { SupabaseAuthService } from "./supabase-auth-service";
 import { createContext, useContext } from "react";
 import type { AuthService } from "./auth-service";
