@@ -8,20 +8,7 @@ const supabase = createClient(
 
 export class SupabaseAuthService extends AuthService {
   getLoggedUser(): string | null {
-    throw new Error("Method not implemented.");
-  }
-
-  async isEmailTaken(value: string): Promise<boolean> {
-    try {
-      const { data } = await supabase.auth.signUp({
-        email: value,
-        password: "wrong-passwork",
-      });
-
-      return data.user !== null;
-    } catch (error: unknown) {
-      return false;
-    }
+    return localStorage.getItem("loggedUser");
   }
 
   async signup(email: string, password: string, name: string): Promise<void> {
@@ -41,11 +28,24 @@ export class SupabaseAuthService extends AuthService {
     }
   }
 
-  login(email: string, password: string): Promise<void> {
-    throw new Error("Method not implemented.");
+  async login(email: string, password: string): Promise<void> {
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+
+      if (error) throw error;
+
+      localStorage.setItem("loggedUser", data.user?.user_metadata.display_name);
+    } catch (error: unknown) {
+      throw error;
+    }
   }
 
   logout(): Promise<void> {
-    throw new Error("Method not implemented.");
+    localStorage.removeItem("loggedUser");
+    supabase.auth.signOut();
+    return Promise.resolve();
   }
 }

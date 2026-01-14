@@ -60,7 +60,7 @@ export function SignUpForm() {
     await validateEmailField(newValue);
   }
 
-  async function validateEmailField(value: string) {
+  function validateEmailField(value: string) {
     if (!value) {
       setEmailError("Email é obrigatório");
       return;
@@ -68,11 +68,6 @@ export function SignUpForm() {
 
     if (!validateEmail(value)) {
       setEmailError("Email inválido");
-      return;
-    }
-
-    if (await auth.isEmailTaken(value)) {
-      setEmailError("Email ja cadastrado");
       return;
     }
 

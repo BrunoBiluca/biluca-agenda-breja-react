@@ -12,9 +12,9 @@ export function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  function handleLogin() {
+  async function handleLogin() {
     try {
-      auth.login(email, password);
+      await auth.login(email, password);
       navigate("/");
     } catch (error) {
       setError((error as Error).message);
