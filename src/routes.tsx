@@ -3,6 +3,7 @@ import { MainPage } from "./main-page/main-page";
 import { BreweryDetail } from "./breweries/brewery-detail";
 import { LandingPage } from "./auth/landing-page";
 import { ProtectedRoute } from "./auth/protected-route";
+import { RedirectLoggedUserRoute } from "./auth/redirect-logged-user-route";
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,12 @@ export const router = createBrowserRouter([
   },
   {
     path: "/login",
-    Component: LandingPage,
+    Component: RedirectLoggedUserRoute,
+    children: [
+      {
+        path: "",
+        Component: LandingPage,
+      },
+    ],
   },
 ]);
