@@ -1,5 +1,5 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { useAuth } from "./services/auth-context";
+import { useAuth } from "../services/auth-context";
 
 export function RedirectLoggedUserRoute() {
   const auth = useAuth();

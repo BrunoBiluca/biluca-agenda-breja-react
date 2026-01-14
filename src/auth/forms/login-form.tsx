@@ -1,7 +1,7 @@
 import { FieldError, FieldGroup, FieldLabel } from "@ui/field";
 import { Input } from "@ui/input";
 import { useContext, useState } from "react";
-import { AuthContext } from "./services/auth-context";
+import { AuthContext } from "../services/auth-context";
 import { useNavigate } from "react-router";
 
 export function LoginForm() {

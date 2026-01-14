@@ -1,7 +1,7 @@
 import { FieldError, FieldGroup, FieldLabel } from "@ui/field";
 import { Input } from "@ui/input";
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "./services/auth-context";
+import { AuthContext } from "../services/auth-context";
 import { validateEmail } from "@lib/email-validation";
 import { checkPasswordStrength } from "@lib/passwork-validation";
 
