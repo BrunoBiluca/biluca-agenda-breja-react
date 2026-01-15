@@ -10,11 +10,14 @@ Tecnologias utilizadas:
 - [shadcn](https://ui.shadcn.com/docs)
 - [Tailwind](https://v3.tailwindcss.com/docs/guides/create-react-app)
 
-Extensões:
+Plugins recomendados para usar no Visual Studio Code:
 
-- [biomejs](https://biomejs.dev/)
-  - Como uma alternativa ao ESLint e ao Prettier
+- ESLint
+- Prettier
 
+Documentação da API open-source utilizada:
+
+- [Open Brewery DB](https://openbrewerydb.org/documentation)
 
 # Tarefas
 
@@ -22,7 +25,6 @@ Extensões:
   - [ ] Estático
   - [ ] Mockado
 - [ ] Recuperar as informações de cervejarias
-
 
 # Criação do ambiente de desenvolvimento
 
