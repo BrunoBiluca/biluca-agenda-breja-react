@@ -1,3 +1,4 @@
+import { TrashIcon } from "@phosphor-icons/react";
 import {
   Card,
   CardDescription,
@@ -5,7 +6,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@ui/card";
-import { Trash } from "lucide-react";
 
 export function Schedule() {
   return (
@@ -33,7 +33,8 @@ function ScheduleItem() {
       </CardHeader>
       <CardFooter>
         <button className="cursor-pointer transition">
-          <Trash
+          <TrashIcon
+            size={24}
             className="text-red-base hover:text-red-base/80"
             aria-label="Cancelar visita"
           />
