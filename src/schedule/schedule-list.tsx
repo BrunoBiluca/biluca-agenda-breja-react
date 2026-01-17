@@ -7,6 +7,10 @@ export function ScheduleList() {
   const agenda = useBreweryScheduleData();
   const [schedule, setSchedule] = useState<BrewerySchedule[]>([]);
 
+  function updateList(newSchedule: BrewerySchedule) {
+    setSchedule([...schedule, newSchedule]);
+  }
+
   useEffect(() => {
     async function getAllSchedules() {
       const res = await agenda.getAll();
@@ -14,7 +18,11 @@ export function ScheduleList() {
     }
 
     getAllSchedules();
-    return () => {};
+
+    agenda.onNewSchedule.subscribe(updateList);
+    return () => {
+      agenda.onNewSchedule.unsubscribe(updateList);
+    };
   }, []);
 
   return (

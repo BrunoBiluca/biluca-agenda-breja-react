@@ -3,13 +3,36 @@ import { CardFooter, CardHeader, CardTitle } from "@ui/card";
 import { FieldDescription, FieldGroup, FieldLabel } from "@ui/field";
 import { Input } from "@ui/input";
 import { Textarea } from "@ui/textarea";
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useContext, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import { useBreweryScheduleData } from "../services/brewery-schedule-context";
+import { BreweryScheduleRequest } from "../services/brewery-schedule-request.model";
+import { BreweriesDataContext } from "@app/breweries/services/BreweriesDataContext";
 
 export function ScheduleVisitForm({ setModalContent }: any) {
   const navigate = useNavigate();
+  const params = useParams();
+  const breweries = useContext(BreweriesDataContext);
+  const schedules = useBreweryScheduleData();
 
+  const [visitDate, setVisitDate] = useState("");
+  const [notes, setNotes] = useState("");
   const [guests, setGuests] = useState(["Ana", "Beto", "Carla"]);
+
+  async function createBrewerySchedule(event: any): Promise<void> {
+    event.preventDefault();
+    const brewery = await breweries.get(params.breweryId!);
+    const data = new BreweryScheduleRequest(
+      brewery.id,
+      brewery.name,
+      new Date(visitDate),
+      guests,
+      notes,
+    );
+
+    schedules.create(data);
+    navigate("/");
+  }
 
   return (
     <>
@@ -21,7 +44,7 @@ export function ScheduleVisitForm({ setModalContent }: any) {
           <XCircleIcon size={30} />
         </button>
       </div>
-      <form className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4" onSubmit={createBrewerySchedule}>
         <CardHeader className="p-6">
           <CardTitle className="text-center">
             <h1>
@@ -37,9 +60,12 @@ export function ScheduleVisitForm({ setModalContent }: any) {
             </FieldLabel>
             <Input
               id="visit-date"
+              name="visitdate"
               type="date"
               aria-invalid="false"
               className="focus-visible:ring-[1px]"
+              value={visitDate}
+              onChange={(e) => setVisitDate(e.target.value)}
               required
             />
           </FieldGroup>
@@ -91,9 +117,12 @@ export function ScheduleVisitForm({ setModalContent }: any) {
             </FieldLabel>
             <Textarea
               id="observations"
+              name="observations"
               placeholder="Ex: alguma restrição alimentar, etc."
               rows={4}
               className="focus-visible:ring-[1px]"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
             />
           </FieldGroup>
         </CardHeader>

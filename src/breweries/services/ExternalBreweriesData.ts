@@ -2,6 +2,12 @@ import type { BreweriesData } from "./BreweriesData";
 import type { Brewery } from "./Brewery.model";
 
 export class ExternalBreweriesData implements BreweriesData {
+  async get(breweryId: string): Promise<Brewery> {
+    return this.getAll().then(
+      (breweries) => breweries.find((brewery) => brewery.id === breweryId)!,
+    );
+  }
+
   async getAll(): Promise<Brewery[]> {
     try {
       const result = await fetch("https://api.openbrewerydb.org/v1/breweries");
