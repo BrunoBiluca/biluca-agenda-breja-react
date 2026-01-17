@@ -1,0 +1,118 @@
+import { XCircleIcon, XIcon } from "@phosphor-icons/react";
+import { CardFooter, CardHeader, CardTitle } from "@ui/card";
+import { FieldDescription, FieldGroup, FieldLabel } from "@ui/field";
+import { Input } from "@ui/input";
+import { Textarea } from "@ui/textarea";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+
+export function ScheduleVisitForm({ setModalContent }: any) {
+  const navigate = useNavigate();
+
+  const [guests, setGuests] = useState(["Ana", "Beto", "Carla"]);
+
+  return (
+    <>
+      <div className="relative">
+        <button
+          onClick={() => navigate(-1)}
+          className="absolute top-2 right-2 hover:cursor-pointer"
+        >
+          <XCircleIcon size={30} />
+        </button>
+      </div>
+      <form className="flex flex-col gap-4">
+        <CardHeader className="p-6">
+          <CardTitle className="text-center">
+            <h1>
+              Agendar visita à{" "}
+              <span className="text-orange-base">Cervejaria do Alemão</span>
+            </h1>
+          </CardTitle>
+          <hr className="my-2 border-gray-200" />
+
+          <FieldGroup>
+            <FieldLabel htmlFor="visit-date" className="mb-1">
+              Data da visita
+            </FieldLabel>
+            <Input
+              id="visit-date"
+              type="date"
+              aria-invalid="false"
+              className="focus-visible:ring-[1px]"
+              required
+            />
+          </FieldGroup>
+          <FieldGroup>
+            <FieldLabel htmlFor="guests" className="mb-1">
+              Convidados
+            </FieldLabel>
+            <div className="flex min-h-10 flex-wrap gap-2 rounded-md border p-2">
+              {guests.map((guest, index) => (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newGuests = [...guests];
+                    newGuests.splice(index, 1);
+                    setGuests(newGuests);
+                  }}
+                  key={index}
+                  className="inline-flex cursor-pointer items-center rounded-md bg-gray-100 px-2 py-1 text-sm"
+                >
+                  {guest}
+                  <span className="ml-2">
+                    <XIcon size={12} color="red" />
+                  </span>
+                </button>
+              ))}
+              <input
+                type="text"
+                className="min-w-[100px] flex-1 bg-transparent outline-none"
+                placeholder="Digite e pressione Enter"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    const value = e.currentTarget.value.trim();
+                    if (value) {
+                      setGuests([...guests, value]);
+                      e.currentTarget.value = "";
+                    }
+                  }
+                }}
+              />
+            </div>
+            <FieldDescription>
+              Digite e pressione Enter para adicionar um convidado
+            </FieldDescription>
+          </FieldGroup>
+          <FieldGroup>
+            <FieldLabel htmlFor="observations" className="mb-1">
+              Observações
+            </FieldLabel>
+            <Textarea
+              id="observations"
+              placeholder="Ex: alguma restrição alimentar, etc."
+              rows={4}
+              className="focus-visible:ring-[1px]"
+            />
+          </FieldGroup>
+        </CardHeader>
+        <CardFooter className="flex items-center justify-between px-6 pb-6">
+          <button
+            type="submit"
+            className="border-orange-base bg-orange-base hover:bg-orange-light flex items-center gap-2 rounded-lg border px-3 py-2 transition hover:cursor-pointer"
+          >
+            Confirmar agendamento
+          </button>
+          <button
+            type="button"
+            onClick={() => setModalContent("brewery-detail")}
+            className="flex items-center gap-2 rounded-lg border border-gray-500 bg-gray-200 px-3 py-2 transition hover:cursor-pointer hover:bg-gray-100"
+          >
+            Voltar
+          </button>
+        </CardFooter>
+      </form>
+    </>
+  );
+}
