@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { BreweryItem } from "./brewery-item";
-import { BreweriesDataContext } from "@app/breweries-data/BreweriesDataContext";
+import { BreweriesDataContext } from "@app/breweries/services/BreweriesDataContext";
 
 export function Breweries() {
   const data = useContext(BreweriesDataContext);

@@ -3,7 +3,7 @@ import { LocalBreweriesData } from "@testing/standalone-mode/LocalBreweriesData"
 import type { BreweriesData } from "./BreweriesData";
 import { ExternalBreweriesData } from "./ExternalBreweriesData";
 
-function BreweriesDataFac() {
+export function BreweriesDataFac() {
   const isStandalone = import.meta.env.VITE_STANDALONE === "true";
   return isStandalone ? new LocalBreweriesData() : new ExternalBreweriesData();
 }

@@ -1,4 +1,4 @@
-import { Schedule } from "../schedule/Schedule";
+import { ScheduleList } from "../schedule/schedule-list";
 import { Breweries } from "../breweries/breweries";
 import { Outlet, useNavigate } from "react-router";
 import { SignOutIcon } from "@phosphor-icons/react";
@@ -29,7 +29,7 @@ export function MainPage() {
         </button>
       </header>
       <section id="schedule" className="my-4">
-        <Schedule />
+        <ScheduleList />
       </section>
       <section id="breweries" className="my-4">
         <Breweries />

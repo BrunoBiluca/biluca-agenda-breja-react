@@ -8,7 +8,7 @@ describe("MainPage", () => {
     const { container } = render(
       <BrowserRouter>
         <MainPage />
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     expect(container.querySelector("header")).not.toBeUndefined();

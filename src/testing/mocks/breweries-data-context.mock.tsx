@@ -1,4 +1,4 @@
-import { BreweriesDataContext } from "@app/breweries-data/BreweriesDataContext";
+import { BreweriesDataContext } from "@app/breweries/services/BreweriesDataContext";
 
 export const MockBreweriesDataContext = ({ children, mockValue }: any) => {
   return (

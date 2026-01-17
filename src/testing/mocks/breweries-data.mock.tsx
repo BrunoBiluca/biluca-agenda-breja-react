@@ -1,4 +1,4 @@
-import type { BreweriesData } from "@app/breweries-data/BreweriesData";
+import type { BreweriesData } from "@app/breweries/services/BreweriesData";
 
 export class MockBreweriesData implements BreweriesData {
   constructor(private noData: boolean = false) {}
