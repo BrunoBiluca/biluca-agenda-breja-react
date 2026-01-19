@@ -7,8 +7,11 @@ import {
   CardTitle,
 } from "@ui/card";
 import type { BrewerySchedule } from "./services/brewery-schedule.model";
+import { useBreweryScheduleData } from "./services/brewery-schedule-context";
 
 export function ScheduleItem({ item }: { item: BrewerySchedule }) {
+  const schedule = useBreweryScheduleData();
+
   return (
     <Card className="flex flex-row gap-4 p-4">
       <CardHeader className="flex flex-1 flex-col gap-4">
@@ -24,7 +27,7 @@ export function ScheduleItem({ item }: { item: BrewerySchedule }) {
         </CardDescription>
       </CardHeader>
       <CardFooter>
-        <button className="cursor-pointer transition">
+        <button className="cursor-pointer transition" onClick={() => schedule.cancel(item)}>
           <TrashIcon
             size={24}
             className="text-red-base hover:text-red-base/80"
