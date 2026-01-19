@@ -1,6 +1,5 @@
-import { createClient } from "@supabase/supabase-js";
-import { AuthService } from "../../auth/services/auth-service";
-
+import { AuthService } from "@app/auth/services/auth-service";
+import { supabase } from "./client";
 
 export class SupabaseAuthService extends AuthService {
   getLoggedUser(): string | null {
