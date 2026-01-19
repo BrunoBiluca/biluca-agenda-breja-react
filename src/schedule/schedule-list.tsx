@@ -7,29 +7,12 @@ export function ScheduleList() {
   const agenda = useBreweryScheduleData();
   const [schedule, setSchedule] = useState<BrewerySchedule[]>([]);
 
-  function addToList(newSchedule: BrewerySchedule) {
-    setSchedule([...schedule, newSchedule]);
-  }
-
-  function removeFromList(removedSchedule: BrewerySchedule) {
-    console.log("remove", removedSchedule.id);
-    setSchedule(schedule.filter((item) => item.id !== removedSchedule.id));
-  }
-
   useEffect(() => {
-    async function getAllSchedules() {
-      const res = await agenda.getAll();
-      setSchedule(res);
-    }
+    agenda.getAll().then(setSchedule);
 
-    getAllSchedules();
-
-    agenda.onNewSchedule.subscribe(addToList);
-    agenda.onScheduleCanceled.subscribe(removeFromList);
-    return () => {
-      agenda.onNewSchedule.unsubscribe(addToList);
-      agenda.onScheduleCanceled.unsubscribe(removeFromList);
-    };
+    agenda.onNewSchedule.subscribe(setSchedule);
+    agenda.onScheduleCanceled.subscribe(setSchedule);
+    return () => {};
   }, []);
 
   return (
