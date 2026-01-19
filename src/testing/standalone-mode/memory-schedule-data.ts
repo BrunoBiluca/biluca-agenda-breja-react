@@ -1,6 +1,6 @@
 import { BreweryScheduleData } from "@app/schedule/services/brewery-schedule-data";
-import type { BreweryScheduleRequest } from "@app/schedule/services/brewery-schedule-request.model";
-import type { BrewerySchedule } from "@app/schedule/services/brewery-schedule.model";
+import type { BreweryScheduleRequest } from "@app/schedule/models/brewery-schedule-request.model";
+import type { BrewerySchedule } from "@app/schedule/models/brewery-schedule.model";
 
 export class MemoryScheduleData extends BreweryScheduleData {
   schedules: BrewerySchedule[] = [

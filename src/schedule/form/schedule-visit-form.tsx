@@ -6,7 +6,7 @@ import { Textarea } from "@ui/textarea";
 import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useBreweryScheduleData } from "../services/brewery-schedule-context";
-import { BreweryScheduleRequest } from "../services/brewery-schedule-request.model";
+import { BreweryScheduleRequest } from "../models/brewery-schedule-request.model";
 import { BreweriesDataContext } from "@app/breweries/services/BreweriesDataContext";
 
 export function ScheduleVisitForm({ setModalContent }: any) {

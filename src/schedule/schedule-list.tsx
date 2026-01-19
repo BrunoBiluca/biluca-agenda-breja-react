@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useBreweryScheduleData } from "./services/brewery-schedule-context";
-import type { BrewerySchedule } from "./services/brewery-schedule.model";
+import type { BrewerySchedule } from "./models/brewery-schedule.model";
 import { ScheduleItem } from "./schedule-item";
 
 export function ScheduleList() {

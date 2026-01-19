@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@ui/card";
-import type { BrewerySchedule } from "./services/brewery-schedule.model";
+import type { BrewerySchedule } from "./models/brewery-schedule.model";
 import { useBreweryScheduleData } from "./services/brewery-schedule-context";
 
 export function ScheduleItem({ item }: { item: BrewerySchedule }) {

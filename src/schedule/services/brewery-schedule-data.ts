@@ -1,6 +1,6 @@
 import { Observable } from "@lib/observable";
-import type { BreweryScheduleRequest } from "./brewery-schedule-request.model";
-import type { BrewerySchedule } from "./brewery-schedule.model";
+import type { BreweryScheduleRequest } from "../models/brewery-schedule-request.model";
+import type { BrewerySchedule } from "../models/brewery-schedule.model";
 
 export abstract class BreweryScheduleData {
   onNewSchedule: Observable = new Observable();
