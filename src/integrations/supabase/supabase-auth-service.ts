@@ -1,10 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
-import { AuthService } from "./auth-service";
+import { AuthService } from "../../auth/services/auth-service";
 
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY,
-);
 
 export class SupabaseAuthService extends AuthService {
   getLoggedUser(): string | null {
