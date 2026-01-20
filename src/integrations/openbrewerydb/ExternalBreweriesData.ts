@@ -1,5 +1,5 @@
-import type { BreweriesData } from "./BreweriesData";
-import type { Brewery } from "./Brewery.model";
+import type { BreweriesData } from "../../breweries/services/BreweriesData";
+import type { Brewery } from "../../breweries/services/Brewery.model";
 
 export class ExternalBreweriesData implements BreweriesData {
   async get(breweryId: string): Promise<Brewery> {

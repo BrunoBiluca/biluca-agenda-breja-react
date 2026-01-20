@@ -28,13 +28,13 @@ export class MemoryScheduleData extends BreweryScheduleData {
       notes: request.notes,
     };
     this.schedules = [...this.schedules, newSchedule];
-    this.onNewSchedule.notify(this.schedules);
+    this.onUpdateSchedules.notify(this.schedules);
     return Promise.resolve(newSchedule);
   }
 
   cancel(schedule: BrewerySchedule): Promise<void> {
     this.schedules = this.schedules.filter((item) => item.id !== schedule.id);
-    this.onScheduleCanceled.notify(this.schedules);
+    this.onUpdateSchedules.notify(this.schedules);
     return Promise.resolve();
   }
 }

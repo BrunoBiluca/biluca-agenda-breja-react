@@ -3,8 +3,7 @@ import type { BreweryScheduleRequest } from "../models/brewery-schedule-request.
 import type { BrewerySchedule } from "../models/brewery-schedule.model";
 
 export abstract class BreweryScheduleData {
-  onNewSchedule: Observable = new Observable();
-  onScheduleCanceled: Observable = new Observable();
+  onUpdateSchedules: Observable = new Observable();
 
   abstract getAll(): Promise<BrewerySchedule[]>;
   abstract create(request: BreweryScheduleRequest): Promise<BrewerySchedule>;

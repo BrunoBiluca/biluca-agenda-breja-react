@@ -10,8 +10,7 @@ export function ScheduleList() {
   useEffect(() => {
     agenda.getAll().then(setSchedule);
 
-    agenda.onNewSchedule.subscribe(setSchedule);
-    agenda.onScheduleCanceled.subscribe(setSchedule);
+    agenda.onUpdateSchedules.subscribe(setSchedule);
     return () => {};
   }, []);
 

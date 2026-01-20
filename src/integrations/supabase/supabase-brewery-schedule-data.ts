@@ -40,12 +40,22 @@ export class SupabaseBreweryScheduleData extends BreweryScheduleData {
     }
 
     const allSchedules = await this.getAll();
-    this.onNewSchedule.notify(allSchedules);
+    this.onUpdateSchedules.notify(allSchedules);
     return this.mapSchedule(data![0]);
   }
 
-  cancel(schedule: BrewerySchedule): Promise<void> {
-    throw new Error("Method not implemented.");
+  async cancel(schedule: BrewerySchedule): Promise<void> {
+    const { error } = await database
+      .from("brewery_schedules")
+      .delete()
+      .eq("id", schedule.id);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    const allSchedules = await this.getAll();
+    this.onUpdateSchedules.notify(allSchedules);
   }
 
   private mapSchedule(item: any): BrewerySchedule {
