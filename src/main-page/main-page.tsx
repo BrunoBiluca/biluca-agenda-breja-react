@@ -18,7 +18,8 @@ export function MainPage() {
       <header className="flex justify-between">
         <h1>
           Bora beber,{" "}
-          <span className="text-orange-base">{auth.getLoggedUser()!}</span>?
+          <span className="text-orange-base">{auth.getLoggedUser()!.name}</span>
+          ?
         </h1>
         <button
           className="flex items-center gap-2 rounded-lg border border-gray-500 bg-gray-200 px-3 py-2 transition hover:cursor-pointer hover:bg-gray-100"

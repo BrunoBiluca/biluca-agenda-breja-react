@@ -1,11 +1,8 @@
+import { LoggedUser } from "@app/auth/services/logged-user.model";
 import { AuthService } from "../../auth/services/auth-service";
 
 export class LocalAuthService extends AuthService {
   registeredUsers: string[] = [];
-
-  getLoggedUser(): string | null {
-    return localStorage.getItem("loggedUser") || null;
-  }
 
   isEmailTaken(value: string): Promise<boolean> {
     return Promise.resolve(value === "exists@email.com");
@@ -22,7 +19,7 @@ export class LocalAuthService extends AuthService {
     );
     if (currUser) {
       const name = currUser.split(":")[0];
-      localStorage.setItem("loggedUser", name);
+      this.setLoggedUser(new LoggedUser(name, email, "1"));
       return Promise.resolve();
     }
     return Promise.reject(new Error("Invalid credentials"));

@@ -1,11 +1,8 @@
 import { AuthService } from "@app/auth/services/auth-service";
 import { supabase } from "./client";
+import { LoggedUser } from "@app/auth/services/logged-user.model";
 
 export class SupabaseAuthService extends AuthService {
-  getLoggedUser(): string | null {
-    return localStorage.getItem("loggedUser");
-  }
-
   async signup(email: string, password: string, name: string): Promise<void> {
     try {
       const { error } = await supabase.auth.signUp({
@@ -32,7 +29,13 @@ export class SupabaseAuthService extends AuthService {
 
       if (error) throw error;
 
-      localStorage.setItem("loggedUser", data.user?.user_metadata.display_name);
+      this.setLoggedUser(
+        new LoggedUser(
+          data.user!.user_metadata.display_name,
+          email,
+          data.user!.id,
+        ),
+      );
     } catch (error: unknown) {
       throw error;
     }
