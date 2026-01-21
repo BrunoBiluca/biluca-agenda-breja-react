@@ -8,8 +8,10 @@ import {
   CardTitle,
 } from "@ui/card";
 import { Modal } from "@ui/modal";
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
+import { BreweriesDataContext } from "./services/BreweriesDataContext";
+import type { Brewery } from "./services/Brewery.model";
 
 export const BreweryDetail = () => {
   const navigate = useNavigate();
@@ -17,6 +19,22 @@ export const BreweryDetail = () => {
   const [modalContent, setModalContent] = useState<
     "brewery-detail" | "schedule-visit-form"
   >("brewery-detail");
+
+  const params = useParams();
+  const data = useContext(BreweriesDataContext);
+  const [brewery, setBrewery] = useState<Brewery | null>(null);
+
+  useEffect(() => {
+    const fetchBrewery = async () => {
+      try {
+        const breweryData = await data.get(params.breweryId!);
+        setBrewery(breweryData);
+      } catch (error) {
+        console.error("Erro ao buscar dados da cervejaria:", error);
+      }
+    };
+    fetchBrewery();
+  }, [params.breweryId, data]);
 
   return (
     <Modal className="rounded-2xl border border-gray-200">
@@ -30,21 +48,24 @@ export const BreweryDetail = () => {
               >
                 <XCircleIcon size={30} />
               </button>
-              <img src="https://placehold.co/600x200" alt="" />
+              <img
+                src="https://placehold.co/600x200"
+                className="rounded-t-lg"
+                alt=""
+              />
             </div>
             <CardHeader className="p-6">
               <CardTitle>
-                <h2>Cervejaria do Alemão</h2>
+                <h2>{brewery?.name}</h2>
               </CardTitle>
               <CardDescription className="flex flex-col gap-3 text-base text-gray-500">
                 <p>
-                  A Cervejaria do Alemão é conhecida por suas cervejas
-                  artesanais premiadas e um ambiente acolhedor que remete às
-                  tradicionais tavernas alemãs.
+                  {brewery?.name} - {brewery?.website_url}
                 </p>
                 <p className="flex items-center gap-2">
-                  <MapPinIcon /> Rua da Cevada, 123 - Vila Lúpulo, Cervejópolis
-                  - SP.
+                  <MapPinIcon /> {brewery?.street}, {brewery?.city},{" "}
+                  {brewery?.state_province}, {brewery?.postal_code} -{" "}
+                  {brewery?.country}
                 </p>
               </CardDescription>
             </CardHeader>
@@ -67,7 +88,10 @@ export const BreweryDetail = () => {
           </>
         )}
         {modalContent === "schedule-visit-form" && (
-          <ScheduleVisitForm setModalContent={setModalContent} />
+          <ScheduleVisitForm
+            setModalContent={setModalContent}
+            breweryName={brewery?.name}
+          />
         )}
       </Card>
     </Modal>

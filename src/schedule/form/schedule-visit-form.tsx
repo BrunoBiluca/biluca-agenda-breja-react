@@ -9,7 +9,7 @@ import { useBreweryScheduleData } from "../services/brewery-schedule-context";
 import { BreweryScheduleRequest } from "../models/brewery-schedule-request.model";
 import { BreweriesDataContext } from "@app/breweries/services/BreweriesDataContext";
 
-export function ScheduleVisitForm({ setModalContent }: any) {
+export function ScheduleVisitForm({ setModalContent, breweryName }: any) {
   const navigate = useNavigate();
   const params = useParams();
   const breweries = useContext(BreweriesDataContext);
@@ -49,7 +49,7 @@ export function ScheduleVisitForm({ setModalContent }: any) {
           <CardTitle className="text-center">
             <h1>
               Agendar visita à{" "}
-              <span className="text-orange-base">Cervejaria do Alemão</span>
+              <span className="text-orange-base">{breweryName}</span>
             </h1>
           </CardTitle>
           <hr className="my-2 border-gray-200" />

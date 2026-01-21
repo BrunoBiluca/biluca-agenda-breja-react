@@ -12,7 +12,7 @@ export class ExternalBreweriesData implements BreweriesData {
     try {
       const result = await fetch("https://api.openbrewerydb.org/v1/breweries");
       const json = await result.json();
-      return json.map((brewery: any) => ({
+      return json.map((brewery: Brewery) => ({
         id: brewery.id,
         name: brewery.name,
         brewery_type: brewery.brewery_type,

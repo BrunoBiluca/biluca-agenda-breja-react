@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { BreweryItem } from "./brewery-item";
 import { BreweriesDataContext } from "@app/breweries/services/BreweriesDataContext";
+import type { Brewery } from "../breweries/services/Brewery.model";
 
 export function Breweries() {
   const data = useContext(BreweriesDataContext);
-  const [breweries, setBreweries] = useState<any[] | undefined>(undefined);
+  const [breweries, setBreweries] = useState<Brewery[] | undefined>(undefined);
 
   useEffect(() => {
     const fetchData = async () => {
