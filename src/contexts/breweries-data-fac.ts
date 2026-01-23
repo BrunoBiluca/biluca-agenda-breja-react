@@ -1,7 +1,9 @@
 import { ExternalBreweriesData } from "@app/integrations/openbrewerydb/ExternalBreweriesData";
-import { MemoryBreweriesData } from "@app/testing/standalone-mode/memory-breweries-data";
+import { MemoryBreweriesData } from "@app/testing/standalone-mode/services/memory-breweries-data";
+import { StandaloneModeConfig } from "@app/testing/standalone-mode/standalone-mode";
 
 export function BreweriesDataFac() {
-  const isStandalone = import.meta.env.VITE_STANDALONE === "true";
-  return isStandalone ? new MemoryBreweriesData() : new ExternalBreweriesData();
+  return StandaloneModeConfig.isStandalone()
+    ? new MemoryBreweriesData()
+    : new ExternalBreweriesData();
 }

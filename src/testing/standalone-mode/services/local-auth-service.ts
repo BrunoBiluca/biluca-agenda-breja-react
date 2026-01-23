@@ -1,5 +1,5 @@
 import { LoggedUser } from "@app/auth/services/logged-user.model";
-import { AuthService } from "../../auth/services/auth-service";
+import { AuthService } from "@app/auth/services/auth-service";
 
 export class LocalAuthService extends AuthService {
   registeredUsers: string[] = [];

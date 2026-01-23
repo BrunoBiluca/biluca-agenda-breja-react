@@ -1,7 +1,9 @@
-import { isStandalone } from "@app/app-config";
 import { SupabaseAuthService } from "@app/integrations/supabase/supabase-auth-service";
-import { LocalAuthService } from "@app/testing/standalone-mode/local-auth-service";
+import { LocalAuthService } from "@app/testing/standalone-mode/services/local-auth-service";
+import { StandaloneModeConfig } from "@app/testing/standalone-mode/standalone-mode";
 
 export function authServiceFac() {
-  return isStandalone() ? new LocalAuthService() : new SupabaseAuthService();
+  return StandaloneModeConfig.isStandalone()
+    ? new LocalAuthService()
+    : new SupabaseAuthService();
 }

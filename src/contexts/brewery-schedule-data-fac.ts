@@ -1,9 +1,9 @@
-import { isStandalone } from "@app/app-config";
 import { SupabaseBreweryScheduleData } from "@app/integrations/supabase/supabase-brewery-schedule-data";
-import { MemoryScheduleData } from "@app/testing/standalone-mode/memory-schedule-data";
+import { MemoryScheduleData } from "@app/testing/standalone-mode/services/memory-schedule-data";
+import { StandaloneModeConfig } from "@app/testing/standalone-mode/standalone-mode";
 
 export function breweryScheduleDataFac() {
-  return isStandalone()
+  return StandaloneModeConfig.isStandalone()
     ? new MemoryScheduleData()
     : new SupabaseBreweryScheduleData();
 }
