@@ -1,6 +1,7 @@
 import { BreweryScheduleData } from "@app/schedule/services/brewery-schedule-data";
 import type { BreweryScheduleRequest } from "@app/schedule/models/brewery-schedule-request.model";
 import type { BrewerySchedule } from "@app/schedule/models/brewery-schedule.model";
+import { delay } from "../standalone-functions";
 
 export class MemoryScheduleData extends BreweryScheduleData {
   schedules: BrewerySchedule[] = [
@@ -15,7 +16,7 @@ export class MemoryScheduleData extends BreweryScheduleData {
   ];
 
   getAll(): Promise<BrewerySchedule[]> {
-    return Promise.resolve([...this.schedules]);
+    return delay(() => [...this.schedules], "getAll-schedules");
   }
 
   create(request: BreweryScheduleRequest): Promise<BrewerySchedule> {
@@ -33,8 +34,9 @@ export class MemoryScheduleData extends BreweryScheduleData {
   }
 
   cancel(schedule: BrewerySchedule): Promise<void> {
-    this.schedules = this.schedules.filter((item) => item.id !== schedule.id);
-    this.onUpdateSchedules.notify(this.schedules);
-    return Promise.resolve();
+    return delay(() => {
+      this.schedules = this.schedules.filter((item) => item.id !== schedule.id);
+      this.onUpdateSchedules.notify(this.schedules);
+    });
   }
 }
