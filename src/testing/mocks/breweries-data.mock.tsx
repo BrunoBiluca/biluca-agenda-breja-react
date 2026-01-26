@@ -1,8 +1,10 @@
-import type { BreweriesData } from "@app/breweries/services/BreweriesData";
+import { BreweriesData } from "@app/breweries/services/BreweriesData";
 import type { Brewery } from "@app/breweries/services/Brewery.model";
 
-export class MockBreweriesData implements BreweriesData {
-  constructor(private noData: boolean = false) {}
+export class MockBreweriesData extends BreweriesData {
+  constructor(private noData: boolean = false) {
+    super();
+  }
 
   items: any[] = [
     {
@@ -42,6 +44,15 @@ export class MockBreweriesData implements BreweriesData {
       street: "407 Radam Ln Ste F200",
     },
   ];
+
+  getPage(page: number): Promise<Brewery[]> {
+    if (this.noData) {
+      return Promise.resolve([]);
+    }
+    return Promise.resolve(
+      this.items.splice((page - 1) * this.pageSize, this.pageSize),
+    );
+  }
 
   getAll() {
     if (this.noData) {
