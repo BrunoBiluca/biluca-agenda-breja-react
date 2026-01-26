@@ -7,7 +7,7 @@ export function LandingPage() {
 
   return (
     <div className="flex h-screen w-full flex-row items-stretch justify-center bg-[#f8f7f6]">
-      <div className="flex h-screen flex-1 items-center justify-center bg-[url('src/assets/cerveja-login-bg.jpg')] bg-cover bg-center text-center text-white">
+      <div className="flex h-screen flex-1 items-center justify-center bg-[url('/images/cerveja-login-bg.jpg')] bg-cover bg-center text-center text-white">
         <div className="w-md rounded-md bg-black/50 p-8">
           <h1 className="mb-4 text-5xl text-white text-shadow-lg">
             Brindes memoráveis começam aqui.
