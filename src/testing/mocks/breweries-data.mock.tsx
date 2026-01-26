@@ -1,4 +1,5 @@
 import type { BreweriesData } from "@app/breweries/services/BreweriesData";
+import type { Brewery } from "@app/breweries/services/Brewery.model";
 
 export class MockBreweriesData implements BreweriesData {
   constructor(private noData: boolean = false) {}
@@ -47,5 +48,11 @@ export class MockBreweriesData implements BreweriesData {
       return Promise.resolve([]);
     }
     return Promise.resolve(this.items);
+  }
+
+  get(breweryId: string): Promise<Brewery> {
+    return Promise.resolve(
+      this.items.find((brewery) => brewery.id === breweryId)!,
+    );
   }
 }
