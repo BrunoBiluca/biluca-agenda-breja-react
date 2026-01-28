@@ -32,7 +32,7 @@ export class OpenBreweryDB extends BreweriesData {
     }
   }
 
-  private mapper(brewery: any) {
+  private mapper(brewery: Brewery) {
     return {
       id: brewery.id,
       name: brewery.name,

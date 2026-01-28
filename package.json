@@ -13,6 +13,7 @@
     "test:browser": "vitest --config=vitest.browser.config.ts"
   },
   "dependencies": {
+    "@ark-ui/react": "^5.30.0",
     "@phosphor-icons/react": "^2.1.10",
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-separator": "^1.1.8",
