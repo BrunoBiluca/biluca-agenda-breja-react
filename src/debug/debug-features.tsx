@@ -25,7 +25,7 @@ export function DebugFeatures() {
       size={size}
       onSizeChange={(e) => setSize(e.size)}
     >
-      <FloatingPanel.Trigger className="absolute right-4 bottom-4 flex flex-col items-end md:right-8 md:bottom-8">
+      <FloatingPanel.Trigger className="fixed right-4 bottom-4 flex flex-col items-end md:right-8 md:bottom-8">
         <div className="bg-orange-base group flex h-12 cursor-pointer items-center rounded-full px-3 text-black">
           <BugIcon className="h-6 w-6" />
           <span className="max-w-0 overflow-hidden transition-all duration-300 ease-linear group-hover:max-w-xs">

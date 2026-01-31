@@ -24,10 +24,13 @@
     "crypto": "^1.0.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "@hookform/resolvers": "^5.2.2",
+    "react-hook-form": "^7.71.1",
     "react-router": "^7.9.5",
     "react-router-dom": "^7.9.5",
     "tailwind-merge": "^3.4.0",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.1.17",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
