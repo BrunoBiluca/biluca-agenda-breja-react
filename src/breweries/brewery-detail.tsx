@@ -1,4 +1,4 @@
-import { ScheduleVisitForm } from "@app/schedule/form/schedule-visit-form";
+// import { ScheduleVisitForm } from "@app/schedule/form/schedule-visit-form";
 import { MapPinIcon, XCircleIcon } from "@phosphor-icons/react";
 import {
   Card,
@@ -12,13 +12,15 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { BreweriesDataContext } from "./services/BreweriesDataContext";
 import type { Brewery } from "./services/Brewery.model";
+import { ScheduleVisitFormV2 } from "@app/schedule/form/schedule-visit-form-v2";
+
+type ModalContentProps = "brewery-detail" | "schedule-visit-form";
 
 export const BreweryDetail = () => {
   const navigate = useNavigate();
 
-  const [modalContent, setModalContent] = useState<
-    "brewery-detail" | "schedule-visit-form"
-  >("brewery-detail");
+  const [modalContent, setModalContent] =
+    useState<ModalContentProps>("brewery-detail");
 
   const params = useParams();
   const data = useContext(BreweriesDataContext);
@@ -26,8 +28,9 @@ export const BreweryDetail = () => {
 
   useEffect(() => {
     const fetchBrewery = async () => {
+      if (!params.breweryId) return;
       try {
-        const breweryData = await data.get(params.breweryId!);
+        const breweryData = await data.get(params.breweryId);
         setBrewery(breweryData);
       } catch (error) {
         console.error("Erro ao buscar dados da cervejaria:", error);
@@ -88,7 +91,7 @@ export const BreweryDetail = () => {
           </>
         )}
         {modalContent === "schedule-visit-form" && (
-          <ScheduleVisitForm
+          <ScheduleVisitFormV2
             setModalContent={setModalContent}
             breweryName={brewery?.name}
           />

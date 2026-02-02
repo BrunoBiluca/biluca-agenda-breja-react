@@ -27,7 +27,10 @@ export function ScheduleItem({ item }: { item: BrewerySchedule }) {
         </CardDescription>
       </CardHeader>
       <CardFooter>
-        <button className="cursor-pointer transition" onClick={() => schedule.cancel(item)}>
+        <button
+          className="cursor-pointer transition"
+          onClick={() => schedule.cancel(item)}
+        >
           <TrashIcon
             size={24}
             className="text-red-base hover:text-red-base/80"
