@@ -1,11 +1,12 @@
 import { RouterProvider } from "react-router";
 import { router } from "./routes";
-import { DebugFeatures } from "./debug/debug-features";
+import { DebugFeatures } from "./testing/debug/debug-features";
+import { isStandalone } from "./testing/standalone-mode/standalone-mode";
 
 function App() {
   return (
     <div>
-      <DebugFeatures />
+      {isStandalone() && <DebugFeatures />}
       <RouterProvider router={router} />
     </div>
   );

@@ -58,11 +58,12 @@ export function ScheduleVisitFormV2({
   }, [guests, setValue]);
 
   async function createBrewerySchedule(data: ScheduleVisitFormSchema) {
+    const [dia, mes, ano] = data.visitDate.split("-");
     const brewery = await breweries.get(params.breweryId!);
     const scheduleData = new BreweryScheduleRequest(
       brewery.id,
       brewery.name,
-      new Date(data.visitDate),
+      new Date(Number(ano), Number(mes) - 1, Number(dia)),
       data.guests,
       data.observations || "",
     );
