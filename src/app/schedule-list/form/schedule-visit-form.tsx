@@ -1,74 +1,44 @@
 import { XCircleIcon, XIcon } from "@phosphor-icons/react";
-import { CardFooter, CardHeader, CardTitle } from "@ui/card";
+import {
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@app/common/components/ui/card";
 import {
   FieldDescription,
-  FieldError,
   FieldGroup,
   FieldLabel,
-} from "@ui/field";
-import { Input } from "@ui/input";
-import { Textarea } from "@ui/textarea";
-import { useContext, useEffect, useState } from "react";
+} from "@app/common/components/ui/field";
+import { Input } from "@app/common/components/ui/input";
+import { Textarea } from "@app/common/components/ui/textarea";
+import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { useBreweryScheduleData } from "../services/brewery-schedule-context";
-import { BreweryScheduleRequest } from "../models/brewery-schedule-request.model";
-import { BreweriesDataContext } from "@app/breweries/services/BreweriesDataContext";
-import z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useBreweryScheduleData } from "../../../core/brewery-schedule/brewery-schedule-context";
+import { BreweryScheduleRequest } from "../../../core/brewery-schedule/models/brewery-schedule-request.model";
+import { BreweriesDataContext } from "@core/breweries/breweries-data-context";
 
-interface ScheduleVisitFormV2Props {
-  setModalContent: React.Dispatch<
-    React.SetStateAction<"brewery-detail" | "schedule-visit-form">
-  >;
-  breweryName: string | undefined;
-}
-
-export function ScheduleVisitFormV2({
-  setModalContent,
-  breweryName,
-}: ScheduleVisitFormV2Props) {
+export function ScheduleVisitForm({ setModalContent, breweryName }: any) {
   const navigate = useNavigate();
   const params = useParams();
   const breweries = useContext(BreweriesDataContext);
   const schedules = useBreweryScheduleData();
 
+  const [visitDate, setVisitDate] = useState("");
+  const [notes, setNotes] = useState("");
   const [guests, setGuests] = useState(["Ana", "Beto", "Carla"]);
 
-  const scheduleVisitFormSchema = z.object({
-    visitDate: z.iso.date("Data inválida").min(1, "Data é obrigatória"),
-    guests: z.array(z.string()).min(1, "Adicione pelo menos um convidado"),
-    observations: z.string().optional(),
-  });
-
-  type ScheduleVisitFormSchema = z.infer<typeof scheduleVisitFormSchema>;
-
-  const {
-    setValue,
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<ScheduleVisitFormSchema>({
-    resolver: zodResolver(scheduleVisitFormSchema),
-  });
-
-  // Atualize manualmente o estado do formulário quando guests mudar:
-  useEffect(() => {
-    setValue("guests", guests);
-  }, [guests, setValue]);
-
-  async function createBrewerySchedule(data: ScheduleVisitFormSchema) {
-    const [dia, mes, ano] = data.visitDate.split("-");
+  async function createBrewerySchedule(event: any): Promise<void> {
+    event.preventDefault();
     const brewery = await breweries.get(params.breweryId!);
-    const scheduleData = new BreweryScheduleRequest(
+    const data = new BreweryScheduleRequest(
       brewery.id,
       brewery.name,
-      new Date(Number(ano), Number(mes) - 1, Number(dia)),
-      data.guests,
-      data.observations || "",
+      new Date(visitDate),
+      guests,
+      notes,
     );
 
-    schedules.create(scheduleData);
+    schedules.create(data);
     navigate("/");
   }
 
@@ -82,10 +52,7 @@ export function ScheduleVisitFormV2({
           <XCircleIcon size={30} />
         </button>
       </div>
-      <form
-        className="flex flex-col gap-4"
-        onSubmit={handleSubmit(createBrewerySchedule)}
-      >
+      <form className="flex flex-col gap-4" onSubmit={createBrewerySchedule}>
         <CardHeader className="p-6">
           <CardTitle className="text-center">
             <h1>
@@ -100,14 +67,15 @@ export function ScheduleVisitFormV2({
               Data da visita
             </FieldLabel>
             <Input
-              {...register("visitDate")}
+              id="visit-date"
+              name="visitdate"
               type="date"
               aria-invalid="false"
               className="focus-visible:ring-[1px]"
+              value={visitDate}
+              onChange={(e) => setVisitDate(e.target.value)}
+              required
             />
-            {errors.visitDate && (
-              <FieldError>{errors.visitDate.message}</FieldError>
-            )}
           </FieldGroup>
           <FieldGroup>
             <FieldLabel htmlFor="guests" className="mb-1">
@@ -150,25 +118,26 @@ export function ScheduleVisitFormV2({
             <FieldDescription>
               Digite e pressione Enter para adicionar um convidado
             </FieldDescription>
-            {errors.guests && <FieldError>{errors.guests.message}</FieldError>}
           </FieldGroup>
           <FieldGroup>
             <FieldLabel htmlFor="observations" className="mb-1">
               Observações
             </FieldLabel>
             <Textarea
-              {...register("observations")}
+              id="observations"
+              name="observations"
               placeholder="Ex: alguma restrição alimentar, etc."
               rows={4}
               className="focus-visible:ring-[1px]"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
             />
           </FieldGroup>
         </CardHeader>
         <CardFooter className="flex items-center justify-between px-6 pb-6">
           <button
             type="submit"
-            disabled={isSubmitting}
-            className="border-orange-base bg-orange-base hover:bg-orange-light flex items-center gap-2 rounded-lg border px-3 py-2 transition hover:cursor-pointer disabled:opacity-50"
+            className="border-orange-base bg-orange-base hover:bg-orange-light flex items-center gap-2 rounded-lg border px-3 py-2 transition hover:cursor-pointer"
           >
             Confirmar agendamento
           </button>

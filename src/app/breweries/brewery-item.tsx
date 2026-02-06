@@ -1,6 +1,6 @@
 import { Card, CardDescription, CardHeader, CardTitle } from "@ui/card";
 import { NavLink } from "react-router";
-import type { Brewery } from "./services/Brewery.model";
+import type { Brewery } from "../../core/breweries/Brewery.model";
 
 export function BreweryItem({ brewery }: { brewery: Brewery }) {
   return (

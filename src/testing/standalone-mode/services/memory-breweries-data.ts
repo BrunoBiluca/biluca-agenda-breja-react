@@ -1,5 +1,5 @@
-import { BreweriesData } from "@app/breweries/services/BreweriesData";
-import { type Brewery } from "@app/breweries/services/Brewery.model";
+import { BreweriesData } from "@app/core/breweries/BreweriesData";
+import { type Brewery } from "@app/core/breweries/Brewery.model";
 import { delay } from "../standalone-functions";
 import { defaultSetting, getSettingNumber } from "../standalone-mode";
 

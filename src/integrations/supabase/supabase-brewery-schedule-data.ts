@@ -1,10 +1,14 @@
-import type { BreweryScheduleRequest } from "@app/schedule/models/brewery-schedule-request.model";
-import type { BrewerySchedule } from "@app/schedule/models/brewery-schedule.model";
-import { BreweryScheduleData } from "@app/schedule/services/brewery-schedule-data";
+import type { BreweryScheduleRequest } from "@app/core/brewery-schedule/models/brewery-schedule-request.model";
+import type { BrewerySchedule } from "@app/core/brewery-schedule/models/brewery-schedule.model";
 import { database } from "./client";
-import { authServiceFac } from "@app/contexts/auth-service-fac";
+import type { AuthService } from "@app/auth/services/auth-service";
+import { BreweryScheduleData } from "@core/brewery-schedule/brewery-schedule-data";
 
 export class SupabaseBreweryScheduleData extends BreweryScheduleData {
+  constructor(private auth: AuthService) {
+    super();
+  }
+
   async getAll(): Promise<BrewerySchedule[]> {
     const allSchedules = await database.from("brewery_schedules").select("*");
 
@@ -18,8 +22,7 @@ export class SupabaseBreweryScheduleData extends BreweryScheduleData {
   }
 
   async create(request: BreweryScheduleRequest): Promise<BrewerySchedule> {
-    const auth = authServiceFac();
-    const user = auth.getLoggedUser()!;
+    const user = this.auth.getLoggedUser()!;
     const userId = user.id!;
     const newSchedule = {
       id: request.id,
@@ -30,6 +33,7 @@ export class SupabaseBreweryScheduleData extends BreweryScheduleData {
       notes: request.notes,
       user_id: userId,
     };
+    console.log(newSchedule);
     const { data, error } = await database
       .from("brewery_schedules")
       .insert(newSchedule)

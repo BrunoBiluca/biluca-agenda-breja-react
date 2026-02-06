@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useBreweryScheduleData } from "./services/brewery-schedule-context";
-import type { BrewerySchedule } from "./models/brewery-schedule.model";
+import { useBreweryScheduleData } from "../../core/brewery-schedule/brewery-schedule-context";
+import type { BrewerySchedule } from "@core/brewery-schedule/models/brewery-schedule.model";
 import { ScheduleItem } from "./schedule-item";
 import { Spinner } from "@ui/spinner";
 
@@ -10,7 +10,7 @@ export function ScheduleList() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    agenda.getAll().then((res) => {
+    agenda.getAll().then((res: BrewerySchedule[]) => {
       setSchedule(res);
       setLoading(false);
     });

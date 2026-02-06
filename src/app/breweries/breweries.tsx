@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { BreweryItem } from "./brewery-item";
-import { BreweriesDataContext } from "@app/breweries/services/BreweriesDataContext";
-import type { Brewery } from "../breweries/services/Brewery.model";
+import { useBreweriesData } from "@core/breweries/breweries-data-context";
+import type { Brewery } from "@core/breweries/Brewery.model";
 import { Spinner } from "@ui/spinner";
 
 export function Breweries() {
-  const data = useContext(BreweriesDataContext);
+  const data = useBreweriesData();
   const [breweries, setBreweries] = useState<Brewery[]>([]);
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(false);

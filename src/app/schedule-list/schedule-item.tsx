@@ -6,8 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@ui/card";
-import type { BrewerySchedule } from "./models/brewery-schedule.model";
-import { useBreweryScheduleData } from "./services/brewery-schedule-context";
+import type { BrewerySchedule } from "../../core/brewery-schedule/models/brewery-schedule.model";
+import { useBreweryScheduleData } from "../../core/brewery-schedule/brewery-schedule-context";
 
 export function ScheduleItem({ item }: { item: BrewerySchedule }) {
   const schedule = useBreweryScheduleData();

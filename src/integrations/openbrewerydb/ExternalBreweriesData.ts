@@ -1,5 +1,5 @@
-import { BreweriesData } from "../../breweries/services/BreweriesData";
-import type { Brewery } from "../../breweries/services/Brewery.model";
+import { BreweriesData } from "../../core/breweries/BreweriesData";
+import type { Brewery } from "../../core/breweries/Brewery.model";
 
 export class OpenBreweryDB extends BreweriesData {
   async get(breweryId: string): Promise<Brewery> {

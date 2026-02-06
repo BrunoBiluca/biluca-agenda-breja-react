@@ -2,8 +2,8 @@ import { render } from "vitest-browser-react";
 import { page } from "vitest/browser";
 import { expect, test } from "vitest";
 import { ScheduleList } from "./schedule-list";
-import { BreweryScheduleDataProvider } from "./services/brewery-schedule-context";
-import { BreweriesDataProvider } from "@app/breweries/services/BreweriesDataContext";
+import { BreweryScheduleDataProvider } from "../../core/brewery-schedule/brewery-schedule-context";
+import { BreweriesDataProvider } from "@core/breweries/breweries-data-context";
 
 test("should have title called 'Visitas agendadas'", async () => {
   render(

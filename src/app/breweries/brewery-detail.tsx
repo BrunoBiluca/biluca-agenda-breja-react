@@ -1,4 +1,3 @@
-// import { ScheduleVisitForm } from "@app/schedule/form/schedule-visit-form";
 import { MapPinIcon, XCircleIcon } from "@phosphor-icons/react";
 import {
   Card,
@@ -8,11 +7,11 @@ import {
   CardTitle,
 } from "@ui/card";
 import { Modal } from "@ui/modal";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { BreweriesDataContext } from "./services/BreweriesDataContext";
-import type { Brewery } from "./services/Brewery.model";
-import { ScheduleVisitFormV2 } from "@app/schedule/form/schedule-visit-form-v2";
+import { useBreweriesData } from "../../core/breweries/breweries-data-context";
+import type { Brewery } from "../../core/breweries/Brewery.model";
+import { ScheduleVisitFormV2 } from "@app/app/schedule-list/form/schedule-visit-form-v2";
 
 type ModalContentProps = "brewery-detail" | "schedule-visit-form";
 
@@ -23,7 +22,7 @@ export const BreweryDetail = () => {
     useState<ModalContentProps>("brewery-detail");
 
   const params = useParams();
-  const data = useContext(BreweriesDataContext);
+  const data = useBreweriesData();
   const [brewery, setBrewery] = useState<Brewery | null>(null);
 
   useEffect(() => {

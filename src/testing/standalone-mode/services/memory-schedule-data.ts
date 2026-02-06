@@ -1,7 +1,7 @@
-import { BreweryScheduleData } from "@app/schedule/services/brewery-schedule-data";
-import type { BreweryScheduleRequest } from "@app/schedule/models/brewery-schedule-request.model";
-import type { BrewerySchedule } from "@app/schedule/models/brewery-schedule.model";
+import type { BreweryScheduleRequest } from "@app/core/brewery-schedule/models/brewery-schedule-request.model";
+import type { BrewerySchedule } from "@app/core/brewery-schedule/models/brewery-schedule.model";
 import { delay } from "../standalone-functions";
+import { BreweryScheduleData } from "@core/brewery-schedule/brewery-schedule-data";
 
 export class MemoryScheduleData extends BreweryScheduleData {
   schedules: BrewerySchedule[] = [

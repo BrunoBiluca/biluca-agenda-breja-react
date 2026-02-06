@@ -1,4 +1,4 @@
-import { ScheduleList } from "../schedule/schedule-list";
+import { ScheduleList } from "../schedule-list/schedule-list";
 import { Breweries } from "../breweries/breweries";
 import { Outlet, useNavigate } from "react-router";
 import { SignOutIcon } from "@phosphor-icons/react";

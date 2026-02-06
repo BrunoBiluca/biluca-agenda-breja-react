@@ -1,7 +1,7 @@
 import { expect, test } from "vitest";
 import { ScheduleList } from "./schedule-list";
 import { render } from "@testing-library/react";
-import { BreweryScheduleDataProvider } from "./services/brewery-schedule-context";
+import { BreweryScheduleDataProvider } from "../../core/brewery-schedule/brewery-schedule-context";
 
 test("should have the main components", () => {
   const { getByRole, container } = render(

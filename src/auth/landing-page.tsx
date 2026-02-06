@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { SignUpForm } from "./forms/signup-form";
-import { LoginForm } from "./forms/login-form";
 import { LoginFormV2 } from "./forms/login-form-v2";
 import { SignUpFormV2 } from "./forms/signup-form-v2";
 
