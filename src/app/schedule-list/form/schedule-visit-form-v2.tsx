@@ -58,12 +58,13 @@ export function ScheduleVisitFormV2({
   }, [guests, setValue]);
 
   async function createBrewerySchedule(data: ScheduleVisitFormSchema) {
-    const [dia, mes, ano] = data.visitDate.split("-");
+    const [year, month, day] = data.visitDate.split("-").map(Number);
+    const visitDate = new Date(year, month - 1, day, 12, 0, 0);
     const brewery = await breweries.get(params.breweryId!);
     const scheduleData = new BreweryScheduleRequest(
       brewery.id,
       brewery.name,
-      new Date(Number(ano), Number(mes) - 1, Number(dia)),
+      visitDate,
       data.guests,
       data.observations || "",
     );
@@ -102,7 +103,6 @@ export function ScheduleVisitFormV2({
             <Input
               {...register("visitDate")}
               type="date"
-              aria-invalid="false"
               className="focus-visible:ring-[1px]"
             />
             {errors.visitDate && (
