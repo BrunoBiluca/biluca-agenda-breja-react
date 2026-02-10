@@ -16,6 +16,9 @@ import { ScheduleVisitFormV2 } from "@app/app/schedule-list/form/schedule-visit-
 type ModalContentProps = "brewery-detail" | "schedule-visit-form";
 
 export const BreweryDetail = () => {
+  const [error, setError] = useState<Error | undefined>(undefined);
+  if (error) throw error;
+
   const navigate = useNavigate();
 
   const [modalContent, setModalContent] =
@@ -32,7 +35,7 @@ export const BreweryDetail = () => {
         const breweryData = await data.get(params.breweryId);
         setBrewery(breweryData);
       } catch (error) {
-        console.error("Erro ao buscar dados da cervejaria:", error);
+        setError(error as Error);
       }
     };
     fetchBrewery();

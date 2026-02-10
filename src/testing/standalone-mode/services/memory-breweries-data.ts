@@ -14,9 +14,12 @@ export class MemoryBreweriesData extends BreweriesData {
   }
 
   get(breweryId: string): Promise<Brewery> {
-    return Promise.resolve(
-      this.breweries.find((brewery) => brewery.id === breweryId)!,
-    );
+    const brewery = this.breweries.find((brewery) => brewery.id === breweryId);
+
+    if (!brewery) {
+      return Promise.reject(new Error("Brewery not found"));
+    }
+    return Promise.resolve(brewery!);
   }
 
   getPage(page: number): Promise<Brewery[]> {
