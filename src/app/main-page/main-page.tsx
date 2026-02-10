@@ -3,6 +3,7 @@ import { Breweries } from "../breweries/breweries";
 import { Outlet, useNavigate } from "react-router";
 import { SignOutIcon } from "@phosphor-icons/react";
 import { useAuth } from "@app/auth/services/auth-context";
+import { ErrorBoundary } from "@app/common/error-boundary";
 
 export function MainPage() {
   const auth = useAuth();
@@ -33,7 +34,11 @@ export function MainPage() {
         <ScheduleList />
       </section>
       <section id="breweries" className="my-4">
-        <Breweries />
+        <ErrorBoundary
+          fallback={<h2>Ops, algo deu errado ao carregar as cervejarias</h2>}
+        >
+          <Breweries />
+        </ErrorBoundary>
       </section>
       <Outlet />
     </div>

@@ -10,20 +10,27 @@ export function Breweries() {
   const [loading, setLoading] = useState(true);
   const [hasMore, setHasMore] = useState(false);
   const [page, setPage] = useState(1);
+  const [error, setError] = useState<Error | undefined>(undefined);
+  if (error) throw error;
 
   const fetchData = async () => {
     setLoading(true);
-    const recentBreweries = await data.getPage(page);
-    setBreweries([...breweries, ...recentBreweries]);
-    setLoading(false);
 
-    if (recentBreweries.length < data.pageSize) {
-      setHasMore(false);
-      return;
+    try {
+      const recentBreweries = await data.getPage(page);
+      setBreweries([...breweries, ...recentBreweries]);
+      setLoading(false);
+
+      if (recentBreweries.length < data.pageSize) {
+        setHasMore(false);
+        return;
+      }
+
+      setPage(page + 1);
+      setHasMore(true);
+    } catch (error) {
+      setError(error as Error);
     }
-
-    setPage(page + 1);
-    setHasMore(true);
   };
 
   useEffect(() => {

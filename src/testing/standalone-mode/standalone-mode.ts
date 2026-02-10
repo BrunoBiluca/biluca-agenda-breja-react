@@ -12,9 +12,15 @@ export function storeSetting(key: string, value: any) {
   localStorage.setItem(key, value);
 }
 
-export function getSetting<T>(key: string) {
+export function getSetting(key: string): string | null {
   key = formatStandaloneKey(key);
-  return localStorage.getItem(key) as T;
+  return localStorage.getItem(key);
+}
+
+export function getSettingBoolean(key: string): boolean {
+  const v = getSetting(key);
+  if (v === null) return false;
+  return JSON.parse(v);
 }
 
 export function getSettingNumber(key: string): number {
