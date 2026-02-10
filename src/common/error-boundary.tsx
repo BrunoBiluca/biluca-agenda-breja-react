@@ -1,5 +1,5 @@
 import { isStandalone } from "@app/testing/standalone-mode/standalone-mode";
-import { ExternalError } from "@lib/external-error";
+import { CatastrophicExternalError } from "@lib/external-error";
 import * as React from "react";
 
 export class ErrorBoundary extends React.Component<{
@@ -13,7 +13,10 @@ export class ErrorBoundary extends React.Component<{
   }
 
   static getDerivedStateFromError(error: any) {
-    return { hasError: true, allowRetry: error instanceof ExternalError };
+    return {
+      hasError: true,
+      allowRetry: !(error instanceof CatastrophicExternalError),
+    };
   }
 
   componentDidCatch(error: any, info: any) {
