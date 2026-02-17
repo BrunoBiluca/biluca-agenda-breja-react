@@ -17,6 +17,8 @@ import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { useI18n } from "@app/common/i18n/i18n-context";
+import { tx } from "./schedule-visit-form.translations";
 
 interface ScheduleVisitFormV2Props {
   setModalContent: React.Dispatch<
@@ -34,11 +36,13 @@ export function ScheduleVisitFormV2({
   const breweries = useContext(BreweriesDataContext);
   const schedules = useBreweryScheduleData();
 
+  const { t } = useI18n();
+
   const [guests, setGuests] = useState(["Ana", "Beto", "Carla"]);
 
   const scheduleVisitFormSchema = z.object({
-    visitDate: z.iso.date("Data inválida").min(1, "Data é obrigatória"),
-    guests: z.array(z.string()).min(1, "Adicione pelo menos um convidado"),
+    visitDate: z.iso.date(t(tx.validationDate)).min(1, "Data é obrigatória"),
+    guests: z.array(z.string()).min(1, t(tx.validationGuests)),
     observations: z.string().optional(),
   });
 
@@ -97,7 +101,7 @@ export function ScheduleVisitFormV2({
         <CardHeader className="p-6">
           <CardTitle className="text-center">
             <h1>
-              Agendar visita à{" "}
+              {t(tx.title)}{" "}
               <span className="text-orange-base">{breweryName}</span>
             </h1>
           </CardTitle>
@@ -105,7 +109,7 @@ export function ScheduleVisitFormV2({
 
           <FieldGroup>
             <FieldLabel htmlFor="visit-date" className="mb-1">
-              Data da visita
+              {t(tx.visitDate)}
             </FieldLabel>
             <Input
               {...register("visitDate")}
@@ -118,7 +122,7 @@ export function ScheduleVisitFormV2({
           </FieldGroup>
           <FieldGroup>
             <FieldLabel htmlFor="guests" className="mb-1">
-              Convidados
+              {t(tx.guests)}
             </FieldLabel>
             <div className="flex min-h-10 flex-wrap gap-2 rounded-md border p-2">
               {guests.map((guest, index) => (
@@ -141,7 +145,7 @@ export function ScheduleVisitFormV2({
               <input
                 type="text"
                 className="min-w-[100px] flex-1 bg-transparent outline-none"
-                placeholder="Digite e pressione Enter"
+                placeholder={t(tx.guestsDescription)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
@@ -154,18 +158,16 @@ export function ScheduleVisitFormV2({
                 }}
               />
             </div>
-            <FieldDescription>
-              Digite e pressione Enter para adicionar um convidado
-            </FieldDescription>
+            <FieldDescription>{t(tx.guestsDescription)}</FieldDescription>
             {errors.guests && <FieldError>{errors.guests.message}</FieldError>}
           </FieldGroup>
           <FieldGroup>
             <FieldLabel htmlFor="observations" className="mb-1">
-              Observações
+              {t(tx.observations)}
             </FieldLabel>
             <Textarea
               {...register("observations")}
-              placeholder="Ex: alguma restrição alimentar, etc."
+              placeholder={t(tx.observationsPlaceholder)}
               rows={4}
               className="focus-visible:ring-[1px]"
             />
@@ -177,14 +179,14 @@ export function ScheduleVisitFormV2({
             disabled={isSubmitting}
             className="border-orange-base bg-orange-base hover:bg-orange-light flex items-center gap-2 rounded-lg border px-3 py-2 transition hover:cursor-pointer disabled:opacity-50"
           >
-            Confirmar agendamento
+            {t(tx.confirm)}
           </button>
           <button
             type="button"
             onClick={() => setModalContent("brewery-detail")}
             className="flex items-center gap-2 rounded-lg border border-gray-500 bg-gray-200 px-3 py-2 transition hover:cursor-pointer hover:bg-gray-100"
           >
-            Voltar
+            {t(tx.back)}
           </button>
         </CardFooter>
       </form>
