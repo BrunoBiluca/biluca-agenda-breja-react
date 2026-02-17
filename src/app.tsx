@@ -2,12 +2,14 @@ import { RouterProvider } from "react-router";
 import { router } from "./routes";
 import { DebugFeatures } from "./testing/debug/debug-features";
 import { isStandalone } from "./testing/standalone-mode/standalone-mode";
+import { Toaster } from "@ui/sonner";
 
 function App() {
   return (
     <div>
       {isStandalone() && <DebugFeatures />}
       <RouterProvider router={router} />
+      <Toaster />
     </div>
   );
 }

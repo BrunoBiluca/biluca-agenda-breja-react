@@ -16,6 +16,7 @@ import { BreweriesDataContext } from "@core/breweries/breweries-data-context";
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 
 interface ScheduleVisitFormV2Props {
   setModalContent: React.Dispatch<
@@ -69,7 +70,13 @@ export function ScheduleVisitFormV2({
       data.observations || "",
     );
 
-    schedules.create(scheduleData);
+    try {
+      await schedules.create(scheduleData);
+    } catch (error) {
+      toast.error("Erro ao agendar visita", { position: "top-center" });
+      return;
+    }
+
     navigate("/");
   }
 

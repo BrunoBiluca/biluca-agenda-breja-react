@@ -5,9 +5,13 @@ export function delay(callback: () => any, specificKey?: string): Promise<any> {
   defaultSetting(delayKey, 1000);
   const timeout = getSettingNumber(delayKey);
 
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve(callback());
+      try {
+        resolve(callback());
+      } catch (error) {
+        reject(error);
+      }
     }, timeout);
   });
 }
