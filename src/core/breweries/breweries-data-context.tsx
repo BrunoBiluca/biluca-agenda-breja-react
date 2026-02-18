@@ -6,9 +6,15 @@ export const BreweriesDataContext = createContext<BreweriesData>(
   appfac.breweriesData(),
 );
 
-export function BreweriesDataProvider({ children }: any) {
+export function BreweriesDataProvider({
+  children,
+  breweriesData,
+}: {
+  children: any;
+  breweriesData: BreweriesData;
+}) {
   return (
-    <BreweriesDataContext.Provider value={appfac.breweriesData()}>
+    <BreweriesDataContext.Provider value={breweriesData}>
       {children}
     </BreweriesDataContext.Provider>
   );

@@ -2,9 +2,9 @@ import { render } from "vitest-browser-react";
 import { locators, page, type Locator } from "vitest/browser";
 import { Breweries } from "./breweries";
 import { beforeEach, describe, expect, test } from "vitest";
-import { MockBreweriesDataContext } from "@testing/mocks/breweries-data-context.mock";
 import { MockBreweriesData } from "@testing/mocks/breweries-data.mock";
 import { BrowserRouter } from "react-router";
+import { BreweriesDataProvider } from "@core/breweries/breweries-data-context";
 
 declare module "vitest/browser" {
   interface LocatorSelectors {
@@ -21,14 +21,14 @@ locators.extend({
 });
 
 describe("Breweries with valid (mock) data", () => {
-  const mock = new MockBreweriesData();
   beforeEach(() => {
+    const mock = new MockBreweriesData();
     render(
-      <BrowserRouter>
-        <MockBreweriesDataContext mockValue={mock}>
+      <BreweriesDataProvider breweriesData={mock}>
+        <BrowserRouter>
           <Breweries />
-        </MockBreweriesDataContext>
-      </BrowserRouter>,
+        </BrowserRouter>
+      </BreweriesDataProvider>,
     );
   });
 
@@ -43,25 +43,24 @@ describe("Breweries with valid (mock) data", () => {
   test("should have a list of breweries", async () => {
     await expect.element(page.getByRole("list")).toBeInTheDocument();
 
+    const mock = new MockBreweriesData();
+    const breweries = mock!.items;
+    await expect.element(page.getByText(breweries[0].name)).toBeInTheDocument();
     await expect
-      .element(page.getByText(mock.items[0].name))
-      .toBeInTheDocument();
-    await expect
-      .element(page.getByText(mock.items[0].address_1))
+      .element(page.getByText(breweries[0].address_1))
       .toBeInTheDocument();
 
+    await expect.element(page.getByText(breweries[1].name)).toBeInTheDocument();
     await expect
-      .element(page.getByText(mock.items[1].name))
-      .toBeInTheDocument();
-    await expect
-      .element(page.getByText(mock.items[1].address_1))
+      .element(page.getByText(breweries[1].address_1))
       .toBeInTheDocument();
   });
 
   test("should open brewery details when brewery item is clicked", async () => {
     await expect.element(page.getByRole("list")).toBeInTheDocument();
 
-    for (const b of mock.items) {
+    const mock = new MockBreweriesData();
+    for (const b of mock!.items) {
       const breweryItem = page.getBreweryItem(b.name);
       expect(breweryItem).toBeVisible();
       expect(breweryItem).toHaveAttribute("href", "/" + b.id);
@@ -70,12 +69,12 @@ describe("Breweries with valid (mock) data", () => {
 });
 
 describe("Breweries edge cases", () => {
-  const mock = new MockBreweriesData(true);
   beforeEach(() => {
+    const noDataMock = new MockBreweriesData(true);
     render(
-      <MockBreweriesDataContext mockValue={mock}>
-        {<Breweries />}
-      </MockBreweriesDataContext>,
+      <BreweriesDataProvider breweriesData={noDataMock}>
+        <Breweries />
+      </BreweriesDataProvider>,
     );
   });
 
