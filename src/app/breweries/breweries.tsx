@@ -41,7 +41,7 @@ export function Breweries() {
   return (
     <>
       <h2 className="mb-3">Cervejarias</h2>
-      {!hasMore && loading ? (
+      {loading ? (
         <div
           role="status"
           aria-label="Loading"
@@ -52,7 +52,7 @@ export function Breweries() {
             Carregando cervejarias...
           </span>
         </div>
-      ) : breweries.length === 0 ? (
+      ) : !hasMore && breweries.length === 0 ? (
         <p>Nenhuma cervejaria encontrada</p>
       ) : (
         <div

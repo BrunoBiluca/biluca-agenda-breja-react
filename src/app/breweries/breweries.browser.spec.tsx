@@ -26,9 +26,9 @@ describe("Breweries with valid (mock) data", () => {
     render(
       <BrowserRouter>
         <MockBreweriesDataContext mockValue={mock}>
-          {<Breweries />}
+          <Breweries />
         </MockBreweriesDataContext>
-      </BrowserRouter>
+      </BrowserRouter>,
     );
   });
 
@@ -75,7 +75,7 @@ describe("Breweries edge cases", () => {
     render(
       <MockBreweriesDataContext mockValue={mock}>
         {<Breweries />}
-      </MockBreweriesDataContext>
+      </MockBreweriesDataContext>,
     );
   });
 
