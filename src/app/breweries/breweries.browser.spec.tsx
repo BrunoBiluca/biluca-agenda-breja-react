@@ -69,18 +69,17 @@ describe("Breweries with valid (mock) data", () => {
 });
 
 describe("Breweries edge cases", () => {
-  beforeEach(() => {
+  beforeEach(() => {});
+
+  test("should have no breweries", async () => {
     const noDataMock = new MockBreweriesData(true);
-    render(
+    const screen = await render(
       <BreweriesDataProvider breweriesData={noDataMock}>
         <Breweries />
       </BreweriesDataProvider>,
     );
-  });
-
-  test("should have no breweries", async () => {
     await expect
-      .element(page.getByText("Nenhuma cervejaria encontrada"))
+      .element(screen.getByText("Nenhuma cervejaria encontrada"))
       .toBeInTheDocument();
   });
 });
