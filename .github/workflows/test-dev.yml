@@ -21,7 +21,7 @@ jobs:
         run: npm ci
 
       - name: Rodar testes (Vitest)
-        run: npm run test
+        run: npm run test:ci
         # Importante: npm test deve retornar 0 se passar, 1 se falhar
 
       - name: Notificar resultado dos testes
