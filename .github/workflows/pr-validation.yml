@@ -23,12 +23,13 @@ jobs:
           cache: "npm"
 
       - name: Instalar dependências
-        run: npm ci
+        run: |
+          npm i
+          npx playwright install
+          npx playwright install-deps
 
       - name: Rodar testes (Vitest)
-        id: tests
-        run: npm run test
-        continue-on-error: false # Para o workflow se falhar
+        run: npm run test:ci
 
       - name: Adicionar comentário no PR (se testes passarem)
         if: success()
