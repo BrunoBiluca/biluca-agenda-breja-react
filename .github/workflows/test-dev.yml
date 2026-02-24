@@ -18,13 +18,10 @@ jobs:
           cache: "npm"
 
       - name: Instalar dependências
-        run: npm i
-
-      - name: Instalar playwright
-        run: npm playwright install
-
-      - name: Instalar playwright dependências
-        run: npx playwright install-deps
+        run: |
+          npm i
+          npx playwright install
+          npx playwright install-deps
 
       - name: Rodar testes (Vitest)
         run: npm run test:ci
