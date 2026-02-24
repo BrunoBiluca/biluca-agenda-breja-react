@@ -25,8 +25,7 @@ jobs:
       - name: Instalar dependências
         run: |
           npm i
-          npx playwright install
-          npx playwright install-deps
+          npx playwright install --with-deps chromium
 
       - name: Rodar testes (Vitest)
         run: npm run test:ci
