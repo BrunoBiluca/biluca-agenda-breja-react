@@ -20,6 +20,12 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
+      - name: Instalar playwright
+        run: npm playwright install
+
+      - name: Instalar playwright dependências
+        run: npx playwright install-deps
+
       - name: Rodar testes (Vitest)
         run: npm run test:ci
         # Importante: npm test deve retornar 0 se passar, 1 se falhar
