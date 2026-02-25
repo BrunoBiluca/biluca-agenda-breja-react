@@ -6,6 +6,4 @@ sudo apt install nodejs npm -y
 
 npm install
 
-npx playwright install
-
-npx playwright install-deps
+npx playwright install --with-deps chromium

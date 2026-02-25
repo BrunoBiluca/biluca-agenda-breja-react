@@ -1,8 +1,7 @@
 import { createContext, useContext } from "react";
 import type { AuthService } from "./auth-service";
-import { appfac } from "@app/app-factory";
 
-export const AuthContext = createContext<AuthService>(appfac.authService());
+export const AuthContext = createContext<AuthService | null>(null);
 
 export function AuthServiceProvider({
   children,
@@ -16,4 +15,4 @@ export function AuthServiceProvider({
   );
 }
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => useContext(AuthContext)!;

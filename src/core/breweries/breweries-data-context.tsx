@@ -1,10 +1,7 @@
 import { createContext, useContext } from "react";
 import type { BreweriesData } from "@app/core/breweries/BreweriesData";
-import { appfac } from "@app/app-factory";
 
-export const BreweriesDataContext = createContext<BreweriesData>(
-  appfac.breweriesData(),
-);
+export const BreweriesDataContext = createContext<BreweriesData | null>(null);
 
 export function BreweriesDataProvider({
   children,
@@ -21,5 +18,5 @@ export function BreweriesDataProvider({
 }
 
 export function useBreweriesData() {
-  return useContext(BreweriesDataContext);
+  return useContext(BreweriesDataContext)!;
 }
