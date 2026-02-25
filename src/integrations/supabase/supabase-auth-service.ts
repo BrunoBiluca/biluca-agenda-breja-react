@@ -1,11 +1,21 @@
+import { createClient } from "@supabase/supabase-js";
 import { AuthService } from "@app/auth/services/auth-service";
-import { supabase } from "./client";
 import { LoggedUser } from "@app/auth/services/logged-user.model";
 
 export class SupabaseAuthService extends AuthService {
+  private supabase: any;
+
+  constructor() {
+    super();
+    this.supabase = createClient(
+      import.meta.env.VITE_SUPABASE_URL,
+      import.meta.env.VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY,
+    );
+  }
+
   async signup(email: string, password: string, name: string): Promise<void> {
     try {
-      const { error } = await supabase.auth.signUp({
+      const { error } = await this.supabase.auth.signUp({
         email,
         password,
         options: {
@@ -22,7 +32,7 @@ export class SupabaseAuthService extends AuthService {
 
   async login(email: string, password: string): Promise<void> {
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await this.supabase.auth.signInWithPassword({
         email: email,
         password: password,
       });
