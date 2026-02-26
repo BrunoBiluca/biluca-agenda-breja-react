@@ -8,8 +8,10 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
 
-    # Adiciona um status check que pode ser marcado como obrigatório
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
