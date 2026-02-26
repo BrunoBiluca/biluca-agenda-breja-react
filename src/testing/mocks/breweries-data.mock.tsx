@@ -1,12 +1,8 @@
-import { BreweriesData } from "@app/breweries/services/BreweriesData";
-import type { Brewery } from "@app/breweries/services/Brewery.model";
+import { BreweriesData } from "@app/core/breweries/BreweriesData";
+import type { Brewery } from "@app/core/breweries/Brewery.model";
 
 export class MockBreweriesData extends BreweriesData {
-  constructor(private noData: boolean = false) {
-    super();
-  }
-
-  items: any[] = [
+  public items: any[] = [
     {
       id: "5128df48-79fc-4f0f-8b52-d06be54d0cec",
       name: "(405) Brewing Co",
@@ -44,21 +40,24 @@ export class MockBreweriesData extends BreweriesData {
       street: "407 Radam Ln Ste F200",
     },
   ];
+  constructor(private noData: boolean = false) {
+    super();
+  }
 
   getPage(page: number): Promise<Brewery[]> {
     if (this.noData) {
       return Promise.resolve([]);
     }
-    return Promise.resolve(
-      this.items.splice((page - 1) * this.pageSize, this.pageSize),
-    );
+    return Promise.resolve([
+      ...this.items.splice((page - 1) * this.pageSize, this.pageSize),
+    ]);
   }
 
   getAll() {
     if (this.noData) {
       return Promise.resolve([]);
     }
-    return Promise.resolve(this.items);
+    return Promise.resolve([...this.items]);
   }
 
   get(breweryId: string): Promise<Brewery> {

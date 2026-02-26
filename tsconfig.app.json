@@ -2,10 +2,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@ui/*": ["./src/components/ui/*"],
-      "@lib/*": ["./src/lib/*"],
+      "@core/*": ["src/core/*"],
+      "@ui/*": ["src/common/ui/*"],
+      "@lib/*": ["./src/common/lib/*"],
       "@app/*": ["./src/*"],
-      "@testing/*": ["./src/testing/*"]
+      "@testing/*": ["./src/testing/*"],
+      "@common/*": ["./src/common/*"]
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2022",

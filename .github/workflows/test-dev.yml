@@ -1,0 +1,26 @@
+name: Validação e Deploy (DEV)
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Instalar dependências
+        run: |
+          npm i
+          npx playwright install --with-deps chromium
+
+      - name: Rodar testes (Vitest)
+        run: npm run test:ci

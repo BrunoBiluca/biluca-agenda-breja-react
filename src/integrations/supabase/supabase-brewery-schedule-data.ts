@@ -1,25 +1,35 @@
-import type { BreweryScheduleRequest } from "@app/schedule/models/brewery-schedule-request.model";
-import type { BrewerySchedule } from "@app/schedule/models/brewery-schedule.model";
-import { BreweryScheduleData } from "@app/schedule/services/brewery-schedule-data";
-import { database } from "./client";
-import { authServiceFac } from "@app/contexts/auth-service-fac";
+import type { BreweryScheduleRequest } from "@app/core/brewery-schedule/models/brewery-schedule-request.model";
+import type { BrewerySchedule } from "@app/core/brewery-schedule/models/brewery-schedule.model";
+import type { AuthService } from "@app/auth/services/auth-service";
+import { BreweryScheduleData } from "@core/brewery-schedule/brewery-schedule-data";
+import type { Database } from "./supabase";
+
 
 export class SupabaseBreweryScheduleData extends BreweryScheduleData {
+  private database: any;
+
+  constructor(private auth: AuthService) {
+    super();
+    this.database = createClient<Database>(
+    import.meta.env.VITE_SUPABASE_URL,
+    import.meta.env.VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY,
+  );
+  }
+
   async getAll(): Promise<BrewerySchedule[]> {
-    const allSchedules = await database.from("brewery_schedules").select("*");
+    const allSchedules = await this.database.from("brewery_schedules").select("*");
 
     if (allSchedules.error) {
       throw new Error(allSchedules.error.message);
     }
 
-    return allSchedules.data?.map((item) =>
+    return allSchedules.data?.map((item: any) =>
       this.mapSchedule(item),
     ) as BrewerySchedule[];
   }
 
   async create(request: BreweryScheduleRequest): Promise<BrewerySchedule> {
-    const auth = authServiceFac();
-    const user = auth.getLoggedUser()!;
+    const user = this.auth.getLoggedUser()!;
     const userId = user.id!;
     const newSchedule = {
       id: request.id,
@@ -30,7 +40,8 @@ export class SupabaseBreweryScheduleData extends BreweryScheduleData {
       notes: request.notes,
       user_id: userId,
     };
-    const { data, error } = await database
+    console.log(newSchedule);
+    const { data, error } = await this.database
       .from("brewery_schedules")
       .insert(newSchedule)
       .select();
@@ -45,7 +56,7 @@ export class SupabaseBreweryScheduleData extends BreweryScheduleData {
   }
 
   async cancel(schedule: BrewerySchedule): Promise<void> {
-    const { error } = await database
+    const { error } = await this.database
       .from("brewery_schedules")
       .delete()
       .eq("id", schedule.id);
