@@ -1,11 +1,11 @@
 import { FieldError, FieldGroup, FieldLabel } from "@ui/field";
 import { Input } from "@ui/input";
-import { useContext, useState } from "react";
-import { AuthContext } from "../services/auth-context";
+import { useState } from "react";
+import { useAuth } from "../services/auth-context";
 import { useNavigate } from "react-router";
 
 export function LoginForm() {
-  const auth = useContext(AuthContext);
+  const auth = useAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");

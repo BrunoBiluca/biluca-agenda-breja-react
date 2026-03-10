@@ -1,14 +1,14 @@
 import { FieldError, FieldGroup, FieldLabel } from "@ui/field";
 import { Input } from "@ui/input";
-import { useContext, useState } from "react";
-import { AuthContext } from "../services/auth-context";
+import { useState } from "react";
+import { useAuth } from "../services/auth-context";
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { checkPasswordStrength } from "@lib/passwork-validation";
 
 export function SignUpFormV2() {
-  const auth = useContext(AuthContext);
+  const auth = useAuth();
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const [passwordStrengthMessage, setPasswordStrengthMessage] = useState("");

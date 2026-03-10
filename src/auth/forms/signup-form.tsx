@@ -1,12 +1,12 @@
 import { FieldError, FieldGroup, FieldLabel } from "@ui/field";
 import { Input } from "@ui/input";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../services/auth-context";
+import { useEffect, useState } from "react";
+import { useAuth } from "../services/auth-context";
 import { validateEmail } from "@lib/email-validation";
 import { checkPasswordStrength } from "@lib/passwork-validation";
 
 export function SignUpForm() {
-  const auth = useContext(AuthContext);
+  const auth = useAuth();
 
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState<string | undefined>(undefined);
