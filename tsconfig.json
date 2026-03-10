@@ -4,4 +4,16 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@core/*": ["src/core/*"],
+      "@ui/*": ["src/common/ui/*"],
+      "@lib/*": ["./src/common/lib/*"],
+      "@app/*": ["./src/*"],
+      "@testing/*": ["./src/testing/*"],
+      "@common/*": ["./src/common/*"]
+    }
+  }
 }
