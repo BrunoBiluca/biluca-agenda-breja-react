@@ -53,7 +53,7 @@ export class SupabaseAuthService extends AuthService {
 
   logout(): Promise<void> {
     localStorage.removeItem("loggedUser");
-    supabase.auth.signOut();
+    this.supabase.auth.signOut();
     return Promise.resolve();
   }
 }
