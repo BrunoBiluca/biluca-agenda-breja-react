@@ -3,7 +3,7 @@ import type { BrewerySchedule } from "@app/core/brewery-schedule/models/brewery-
 import type { AuthService } from "@app/auth/services/auth-service";
 import { BreweryScheduleData } from "@core/brewery-schedule/brewery-schedule-data";
 import type { Database } from "./supabase";
-
+import { createClient } from "@supabase/supabase-js";
 
 export class SupabaseBreweryScheduleData extends BreweryScheduleData {
   private database: any;
@@ -11,13 +11,15 @@ export class SupabaseBreweryScheduleData extends BreweryScheduleData {
   constructor(private auth: AuthService) {
     super();
     this.database = createClient<Database>(
-    import.meta.env.VITE_SUPABASE_URL,
-    import.meta.env.VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY,
-  );
+      import.meta.env.VITE_SUPABASE_URL,
+      import.meta.env.VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY,
+    );
   }
 
   async getAll(): Promise<BrewerySchedule[]> {
-    const allSchedules = await this.database.from("brewery_schedules").select("*");
+    const allSchedules = await this.database
+      .from("brewery_schedules")
+      .select("*");
 
     if (allSchedules.error) {
       throw new Error(allSchedules.error.message);
