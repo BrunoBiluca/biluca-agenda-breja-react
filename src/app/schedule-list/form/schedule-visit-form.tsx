@@ -1,26 +1,18 @@
 import { XCircleIcon, XIcon } from "@phosphor-icons/react";
-import {
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@app/common/components/ui/card";
-import {
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-} from "@app/common/components/ui/field";
-import { Input } from "@app/common/components/ui/input";
-import { Textarea } from "@app/common/components/ui/textarea";
-import { useContext, useState } from "react";
+import { CardFooter, CardHeader, CardTitle } from "@ui/card";
+import { FieldDescription, FieldGroup, FieldLabel } from "@ui/field";
+import { Input } from "@ui/input";
+import { Textarea } from "@ui/textarea";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { useBreweryScheduleData } from "../../../core/brewery-schedule/brewery-schedule-context";
-import { BreweryScheduleRequest } from "../../../core/brewery-schedule/models/brewery-schedule-request.model";
-import { BreweriesDataContext } from "@core/breweries/breweries-data-context";
+import { useBreweryScheduleData } from "@core/brewery-schedule/brewery-schedule-context";
+import { BreweryScheduleRequest } from "@core/brewery-schedule/models/brewery-schedule-request.model";
+import { useBreweriesData } from "@core/breweries/breweries-data-context";
 
 export function ScheduleVisitForm({ setModalContent, breweryName }: any) {
   const navigate = useNavigate();
   const params = useParams();
-  const breweries = useContext(BreweriesDataContext);
+  const breweries = useBreweriesData();
   const schedules = useBreweryScheduleData();
 
   const [visitDate, setVisitDate] = useState("");
@@ -73,7 +65,7 @@ export function ScheduleVisitForm({ setModalContent, breweryName }: any) {
               aria-invalid="false"
               className="focus-visible:ring-[1px]"
               value={visitDate}
-              onChange={(e) => setVisitDate(e.target.value)}
+              onChange={(e: any) => setVisitDate(e.target.value)}
               required
             />
           </FieldGroup>
@@ -130,7 +122,7 @@ export function ScheduleVisitForm({ setModalContent, breweryName }: any) {
               rows={4}
               className="focus-visible:ring-[1px]"
               value={notes}
-              onChange={(e) => setNotes(e.target.value)}
+              onChange={(e: any) => setNotes(e.target.value)}
             />
           </FieldGroup>
         </CardHeader>

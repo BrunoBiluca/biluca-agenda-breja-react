@@ -8,11 +8,11 @@ import {
 } from "@ui/field";
 import { Input } from "@ui/input";
 import { Textarea } from "@ui/textarea";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { useBreweryScheduleData } from "../../../core/brewery-schedule/brewery-schedule-context";
-import { BreweryScheduleRequest } from "../../../core/brewery-schedule/models/brewery-schedule-request.model";
-import { BreweriesDataContext } from "@core/breweries/breweries-data-context";
+import { useBreweryScheduleData } from "@core/brewery-schedule/brewery-schedule-context";
+import { BreweryScheduleRequest } from "@core/brewery-schedule/models/brewery-schedule-request.model";
+import { useBreweriesData } from "@core/breweries/breweries-data-context";
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -33,7 +33,7 @@ export function ScheduleVisitFormV2({
 }: ScheduleVisitFormV2Props) {
   const navigate = useNavigate();
   const params = useParams();
-  const breweries = useContext(BreweriesDataContext);
+  const breweries = useBreweriesData();
   const schedules = useBreweryScheduleData();
 
   const { t } = useI18n();
