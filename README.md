@@ -29,6 +29,12 @@ Utilizando Toolbox:
 toolbox create --distro ubuntu --release 24.04 react-dev-ubuntu
 ```
 
+Utilizando Distrobox:
+
+```shell
+distrobox create --image ubuntu-toolbox:24.04 --name react-dev-ubuntu
+```
+
 Para a configuração do ambiente é necessário executar os seguintes comandos:
 
 ```shell
